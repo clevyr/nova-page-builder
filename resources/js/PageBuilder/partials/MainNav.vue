@@ -22,7 +22,14 @@
 				if (!this.$page.props.navigations) {
 					return [];
 				}
-				return this.$page.props.navigations.find((nav) => { return nav.slug === 'header' }).menuItems ?? null;
+
+				const nav = this.$page.props.navigations.find((nav) => { return nav.slug === 'header' });
+
+				if (nav) {
+					return nav.menuItems;
+                }
+
+				return null;
 			}
 		},
 		methods: {

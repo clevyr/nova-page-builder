@@ -21,13 +21,9 @@ return [
 
         // Toolbars
         'plugins' => [
-            'lists preview hr anchor pagebreak image wordcount fullscreen directionality paste textpattern media image link table quickbars code'
+            'lists preview hr anchor pagebreak image wordcount fullscreen directionality paste textpattern media image link table code'
         ],
         'toolbar' => 'styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | link visualblocks',
-        'quickbars_insert_toolbar' => 'quicktable image link media',
-        'quickbars_selection_toolbar' => 'bold italic underline | formatselect | bullist numlist | blockquote quicklink',
-        'noneditable_editable_class' => 'mce_editable',
-        'noneditable_noneditable_class' => 'mce_non_editable',
 
         // Tables
         'table_responsive_width' => true,
