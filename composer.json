@@ -1,0 +1,46 @@
+{
+    "name": "clevyr/nova-page-builder",
+    "description": "A Clevyr built Nova Page Builder Resource",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Grant Vinson",
+            "email": "grant@clevyr.com"
+        }
+    ],
+
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
+
+    "require": {
+        "php": "^7.3|^8.0",
+        "laravel/framework": "^8.40",
+        "laravel/nova": "^3.27",
+        "inertiajs/inertia-laravel": "^0.4.2",
+        "whitecube/nova-flexible-content": "^0.2.8",
+        "infinety-es/nova-filemanager": "^2.8",
+        "eminiarts/nova-tabs": "^1.4",
+        "optimistdigital/nova-menu-builder": "^5.3",
+        "anaseqal/nova-sidebar-icons": "^0.0.3",
+        "emilianotisato/nova-tinymce": "^1.2"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Clevyr\\NovaPageBuilder\\": "src"
+        }
+    },
+
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Clevyr\\NovaPageBuilder\\NovaPageBuilderServiceProvider"
+            ]
+        }
+    }
+}
