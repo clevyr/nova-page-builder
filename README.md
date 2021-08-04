@@ -12,7 +12,16 @@ Migrate the database
 ```
 php artisan migrate
 ```
-
+### How to Create Navigation
+*To create the public facing menu:*
+1. Add this line to the `boot()` method in `App/Providers/AppServiceProvider.php`
+```
+\Inertia\Inertia::share(“navigations”, nova_get_menus());
+```
+In the Vue component to AppLayout.vue (`resources/js/Layouts/AppLayout.vue`)...
+1. Add `import MainNav from '@/PageBuilder/partials/MainNav';`
+2. Add `MainNav` to the `components{}` object
+3. Add the `<main-nav />` component to the template. This should be inserted next to the "Dashboard" link in the default Jetstream AppLayout component, you can customize and move this as needed.
 ---
 
 ## What’s Included:
