@@ -17,28 +17,17 @@
 	import OneColumnLayout from "@/PageBuilder/sections/OneColumnLayout";
 	import TwoColumnLayout from "@/PageBuilder/sections/TwoColumnLayout";
 	import Head from '@/PageBuilder/partials/Head';
+	import SectionContent from '@/PageBuilder/mixins/SectionContent';
 
 	export default {
 		props: ['content', 'page'],
+        mixins: [SectionContent],
 		components: {
 			OneColumnLayout,
 			TwoColumnLayout,
 			AppLayout,
 			Hero,
             Head,
-		},
-		methods: {
-			getSection(slug) {
-				const section = this.content.filter((section) => {
-					return section.layout === slug;
-				});
-
-				if (section) {
-					return section[0]['attributes'];
-				}
-
-				return false;
-			}
 		},
 	}
 </script>

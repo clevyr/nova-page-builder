@@ -15,7 +15,6 @@ use Whitecube\NovaFlexibleContent\Flexible;
 use Eminiarts\Tabs\Tabs;
 use Eminiarts\Tabs\TabsOnEdit;
 use App\Nova\Resource;
-use Laravel\Nova\Resource as NovaResource;
 
 class Page extends Resource
 {
