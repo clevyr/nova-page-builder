@@ -1,22 +1,16 @@
 <template>
-    <jet-nav-link
+    <a
         v-for="item in headerMenuItems"
-        as="a"
         :target="item.target"
         :href="item.value"
-        :active="isActive(item.value)"
+        :class="getClasses(item.value)"
     >
         {{ item.name }}
-    </jet-nav-link>
+    </a>
 </template>
 
 <script>
-	import JetNavLink from '@/Jetstream/NavLink';
-
 	export default {
-		components: {
-			JetNavLink,
-		},
 		computed: {
 			headerMenuItems() {
 				if (!this.$page.props.navigations) {
@@ -27,14 +21,15 @@
 
 				if (nav) {
 					return nav.menuItems;
-                }
+				}
 
 				return null;
-			}
+			},
 		},
 		methods: {
-			isActive(href) {
-				return window.location.pathname === href;
+			getClasses(href) {
+				return `
+				inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition ${(window.location.pathname === href) ? 'border-indigo-400 border-b-2' : 'border-transparent'}`;
 			}
 		}
 	}
