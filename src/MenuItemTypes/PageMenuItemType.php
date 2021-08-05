@@ -25,7 +25,7 @@ abstract class PageMenuItemType extends \OptimistDigital\MenuBuilder\MenuItemTyp
 
     public static function getValue($value, ?array $data, $locale)
     {
-        return '/page/'.Page::find($value)->slug;
+        return '/'.Page::find($value)->slug;
     }
 
     public static function getFields(): array

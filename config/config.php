@@ -7,5 +7,7 @@ return [
 
     'model' => \Clevyr\NovaPageBuilder\Models\Page::class,
 
-    'views_path' => resource_path('views/vendor/nova-page-builder/pages/')
+    'views_path' => resource_path('views/vendor/nova-page-builder/pages/'),
+
+    'excluded_routes' => 'nova|dashboard|nova|jetstream|telescope|billing|user|register|login|forgot-password|teams|reset-password|admin'
 ];

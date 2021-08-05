@@ -12,6 +12,14 @@ Migrate the database
 ```
 php artisan migrate
 ```
+
+### Routing
+In the `nova-page-builder.php` config file, there is an `excluded_routes` string. This string contains url primary segments that are NOT allowed. The router ignores GET requests matching this pattern and the Nova Page CRUD validates against these as well.  
+
+We needed to include this because the `/nova, /register, /billing...` routes were being caught by our page controller.  
+
+Besides that, routing is taken care of automatically for Page Builder pages.
+
 ### How to Create Navigation
 *To create the public facing menu:*
 1. Add this line to the `boot()` method in `App/Providers/AppServiceProvider.php`
@@ -22,6 +30,7 @@ In the Vue component to AppLayout.vue (`resources/js/Layouts/AppLayout.vue`)...
 1. Add `import MainNav from '@/PageBuilder/partials/MainNav';`
 2. Add `MainNav` to the `components{}` object
 3. Add the `<main-nav />` component to the template. This should be inserted next to the "Dashboard" link in the default Jetstream AppLayout component, you can customize and move this as needed.
+
 ---
 
 ## What’s Included:

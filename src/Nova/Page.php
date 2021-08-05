@@ -46,6 +46,7 @@ class Page extends Resource
     function __construct($resource)
     {
         parent::__construct($resource);
+        // Set the model to the model from the config fil
         self::$model = config('nova-page-builder.model', \Clevyr\NovaPageBuilder\Models\Page::class);
     }
 
@@ -62,26 +63,32 @@ class Page extends Resource
          * Details panel
          */
         $panels[] = new Panel('Details', [
-                ID::make(__('ID'), 'id')
-                    ->sortable()
-                    ->exceptOnForms(),
+            ID::make(__('ID'), 'id')
+                ->sortable()
+                ->exceptOnForms(),
 
-                Text::make('Title', 'title')
-                    ->required()
-                    ->sortable(),
+            Text::make('Title', 'title')
+                ->required()
+                ->sortable(),
 
-                Select::make('Template')
-                    ->options($this->getTemplates())
-                    ->default('default')
-                    ->required(),
-                Boolean::make('Published?', 'is_published')
-                    ->default(false),
+            Select::make('Template')
+                ->options($this->getTemplates())
+                ->default('default')
+                ->required(),
+            Boolean::make('Published?', 'is_published')
+                ->default(false),
 
-                Slug::make('Slug')
-                    ->from('Title')
-                    ->separator('-')
-                    ->required()
-            ]);
+            Slug::make('Slug')
+                ->from('Title')
+                ->separator('-')
+                ->creationRules(function($request) {
+                    $this->validateSlug($request);
+                })
+                ->updateRules(function($request) {
+                    $this->validateSlug($request);
+                })
+                ->required()
+        ]);
 
         /*
          * Content panel
@@ -240,5 +247,30 @@ class Page extends Resource
     public static function icon()
     {
         return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="sidebar-icon"><path fill="var(--sidebar-icon)" class="heroicon-ui" d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z"/></svg>';
+    }
+
+    /**
+     * Make sure the page slug doesn't match a pattern in our excluded_routes list
+     *
+     * @param $request
+     * @throws \Exception
+     */
+    private function validateSlug($request) {
+        // get excluded routes
+        $excludedPaths = explode('|', config('nova-page-builder.excluded_routes'));
+
+        // get the first segement of the slug to match against
+        $slugs = explode('/', $request->slug);
+
+        if (count($slugs) > 3) {
+            throw new \Exception('Slugs may only have 2 "/" characters');
+        }
+
+        foreach($excludedPaths as $path) {
+            // if the first slug starts with an excluded path string, throw an error
+            if (str_starts_with($slugs[0], $path)) {
+                throw new \Exception('Invalid Slug');
+            }
+        }
     }
 }
