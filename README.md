@@ -174,6 +174,4 @@ In the Vue file, we are importing multiple components.
 9. Add the “Introduction” section and input it’s content
 10. Click “Update Page”
 
-You can view the page at `/page/{slug}` for now (this route will be updated in the future).
-
 You can now add the page to the Main Navigation via the Nova Menu Builder.
