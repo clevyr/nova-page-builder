@@ -48,11 +48,6 @@ class NovaPageBuilderServiceProvider extends ServiceProvider
                 __DIR__ . '/../config/nova-menu.php' => config_path('nova-menu.php')
             ], 'clevyr-nova-page-builder');
 
-            // Publish MenuItemTypes for menu-builder package
-            $this->publishes([
-                __DIR__.'/MenuItemTypes' => app_path('MenuItemTypes'),
-            ], 'clevyr-nova-page-builder');
-
             // Publishing the views.
             $this->publishes([
                 __DIR__.'/../resources/views' => resource_path('views/vendor/nova-page-builder'),
