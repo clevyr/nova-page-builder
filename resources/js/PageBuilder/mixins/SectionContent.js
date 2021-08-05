@@ -14,7 +14,7 @@ export default {
                 return section.layout === slug;
             });
 
-            if (section) {
+            if (section.length > 0) {
                 return section[0]['attributes'];
             }
 
