@@ -12,6 +12,14 @@ Migrate the database
 ```
 php artisan migrate
 ```
+### Routing
+At the bottom of your `web.php` routes file, include:
+```
+Route::fallback(function() {
+    return Clevyr\NovaPageBuilder\NovaPageBuilder::catchAll();
+});
+```
+The `fallback()` function can only be used once in an app. Any custom dev that needs to happen in this function needs to be executed BEFORE the `NovaPageBuilder::catchAll()` function call.
 ### How to Create Navigation
 *To create the public facing menu:*
 1. Add this line to the `boot()` method in `App/Providers/AppServiceProvider.php`

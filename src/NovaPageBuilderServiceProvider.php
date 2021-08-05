@@ -2,6 +2,7 @@
 
 namespace Clevyr\NovaPageBuilder;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 use Laravel\Nova\Nova;
@@ -12,16 +13,15 @@ class NovaPageBuilderServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        //
+        $this->app->bind('NovaPageBuilder', function($app) {
+            return new NovaPageBuilder();
+        });
     }
 
     public function boot()
     {
         // Load migrations
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
-        // Register routes
-        Route::middleware('web')->group(__DIR__.'/../routes/routes.php');
 
         // Register Page Builder resource
         Nova::resources([
@@ -63,6 +63,11 @@ class NovaPageBuilderServiceProvider extends ServiceProvider
                 '--force' => true,
                 '--provider' => 'Anaseqal\NovaSidebarIcons\ToolServiceProvider'
             ]);
+        }
+
+        // Share menu automatically if available
+        if (Schema::hasTable(config('nova-menu.menus_table_name'))) {
+            Inertia::share("navigations", nova_get_menus());
         }
     }
 }

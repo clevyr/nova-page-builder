@@ -40,7 +40,10 @@
         "laravel": {
             "providers": [
                 "Clevyr\\NovaPageBuilder\\NovaPageBuilderServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "NovaPageBuilder": "Clevyr\\NovaPageBuilder\\Facades\\NovaPageBuilder"
+            }
         }
     }
 }
