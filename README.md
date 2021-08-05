@@ -21,10 +21,12 @@ Route::fallback(function() {
 ```
 The `fallback()` function can only be used once in an app. Any custom dev that needs to happen in this function needs to be executed BEFORE the `NovaPageBuilder::catchAll()` function call.
 ### How to Create Navigation
-In the Vue component AppLayout.vue (`resources/js/Layouts/AppLayout.vue`)...
-1. Import the MainNav partial - `import MainNav from '@/PageBuilder/partials/MainNav';`
-2. Register `MainNav` in the `components{}` object
-3. Add the `<main-nav />` component to the template. This should be inserted next to the "Dashboard" link in the default JetStream AppLayout component, you can customize and move this as needed.
+To create the public facing menu, in the Vue component AppLayout.vue (`resources/js/Layouts/AppLayout.vue`)...
+1. Add `import MainNav from '@/PageBuilder/partials/MainNav';` before `export default`
+2. Add `MainNav` to the `components{}` object
+3. Add the `<main-nav />` component to the template. This should be inserted next to the "Dashboard" link in the default Jetstream AppLayout component, you can customize and move this as needed.
+4. Now, go to Nova and create your Menu named "Header".
+
 ---
 
 ## What’s Included:
