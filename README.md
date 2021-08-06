@@ -4,7 +4,7 @@ Install via Composer
 ```
 composer require clevyr/nova-page-builder
 ```
-Publish migrations, Default page config, PageBuilder Vue components, Nova resource, Model and PageController
+Publish migrations, Default page config, PageBuilder Vue components, Nova resource and Model
 ```
 php artisan vendor:publish --tag=clevyr-nova-page-builder
 ```
@@ -31,24 +31,22 @@ Route::fallback(function() {
 There will be 3 new sections in Nova now: Menus, File Manager and Pages.
 
 ### Config Files
-`nova-page-builder.php` - This file lets you set what `model`, `resource` and `views_path` is used for the page builder. You can update these as necessary. 
-`nova-menu.php` - This file configures the Menu Builder package
-`nova-tinymce.php` - This file is a custom config for the TinyMCE Rich-Text-Editor
+`nova-page-builder.php` - This file lets you set what `model`, `resource` and `views_path` is used for the page builder. You can update these as necessary.   
+`nova-menu.php` - This file configures the Menu Builder package.  
+`nova-tinymce.php` - This file is a custom config for the TinyMCE Rich-Text-Editor.  
 
 ### Pages
 Pages require templates. Templates have 2 dependencies, a config file with sections available in that template and a Vue file to render the template. The Page Config file and the Page Template parent directory need to be named the same, capitalization and all.  
-ex: `{views_path}/pages/About.php` & `resources/js/Pages/About/Index.vue`
+ex: `{views_path}/pages/{LayoutName}.php` & `resources/js/Pages/{LayoutName}/Index.vue`
 ##### Page Config
 The config is made up of Nova fields in an array syntax. This uses the Flexible Content package. You can read more docs here: https://github.com/whitecube/nova-flexible-content. To see an example, please refer to `{views_path}/pages/Default.php`
 ##### Page Vue Template
-This package currently works off Inertia so you will create your page layouts in `resources/js/Pages/LAYOUT_NAME/Index.vue`.  To see an example, please refer to `resources/js/pages/Default/Index.vue`
+This package currently works off Inertia so you will create your page layouts in `resources/js/Pages/{LayoutName}/Index.vue`.  To see an example, please refer to `resources/js/pages/Default/Index.vue`
 ###### Default Page Template Components
 Out of the box, this package includes the Hero, One Column Layout and  Two Column Layout components. These are in the `resources/js/PageBuilder` directory. You can modify these at any time.
-#### Page Controller
-The PageController is fairly straightforward. It finds the page via the supplied slug in the URL and then returns an Inertia layout with the `page` and `content` data.
 
 #### Menu
-Menu is coming from https://github.com/optimistdigital/nova-menu-builder. The page builder package publishes the config and migrations for the menu builder package.  You can create custom menu item types and everything else from the docs.    
+Menu is coming from https://github.com/optimistdigital/nova-menu-builder. The page builder package publishes the config for the menu builder package.  You can create custom menu item types and everything else from the docs.    
 
 ##### Rendering the Menu
 To render the menu in the Vue app, include the `<main-nav>` component from the `resources/js/PageBuilder/partials/MainNav.vue` file. This will render a menu with an `<jet-nav-link>` for each link. This can also be customized.
@@ -67,10 +65,10 @@ The File Manager is coming from https://github.com/InfinetyEs/Nova-Filemanager.
 # Creating Page Layouts
 
 ### Config File
-To create new page layouts that will be available in the CMS, create a php file in `{views_path}/pages/NAME.php`. You can view the `Default.php` file to see how it works. The basics of it is an array of Nova fields that are named and will be available in the Vue file.
+To create new page layouts that will be available in the CMS, create a php file in `{views_path}/pages/{LayoutName}.php`. You can view the `Default.php` file to see how it works. The basics of it is an array of Nova fields that are named and will be available in the Vue file.
 
 ### Vue File
-This package is set up to use Inertia by default. To add an Inertia page, create a new Directory and Index.vue file in `resources/js/Pages`. You can see the `Default` Page as an example. The config file and Vue direcotry names need to be identical.
+This package is set up to use Inertia by default. To add an Inertia page, create a new Directory and Index.vue file in `resources/js/Pages`. You can see the `Default` Page as an example. The config file and Vue directory names need to be identical.
 
 ### Accessing Content
 Page data will be passed to the views automatically, thanks to Inertia. To get specific section data, we have a Vue mixin called `SectionContent` that will return the content for a given section.
