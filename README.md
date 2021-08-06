@@ -1,5 +1,5 @@
 # Clevyr Nova Page Builder
-## How to Install
+# How to Install
 Install via Composer
 ```
 composer require clevyr/nova-page-builder
@@ -12,31 +12,34 @@ Migrate the database
 ```
 php artisan migrate
 ```
-### Routing
+### Set Up Routing
 At the bottom of your `web.php` routes file, include:
 ```
 Route::fallback(function() {
     return Clevyr\NovaPageBuilder\NovaPageBuilder::catchAll();
 });
 ```
-The `fallback()` function can only be used once in an app. Any custom dev that needs to happen in this function needs to be executed BEFORE the `NovaPageBuilder::catchAll()` function call.
 ### How to Create Navigation
-To create the public facing menu, in the Vue component AppLayout.vue (`resources/js/Layouts/AppLayout.vue`)...
-1. Add `import MainNav from '@/PageBuilder/partials/MainNav';` before `export default`
-2. Add `MainNav` to the `components{}` object
-3. Add the `<main-nav />` component to the template. This should be inserted next to the "Dashboard" link in the default Jetstream AppLayout component, you can customize and move this as needed.
-4. Now, go to Nova and create your Menu named "Header".
+1. Create the "Header" navigation in the Nova admin.
+2. Add `import MainNav from '@/PageBuilder/partials/MainNav';` to the Vue component AppLayout.vue (`resources/js/Layouts/AppLayout.vue`)
+3. Then, add `MainNav` to the `components{}` object
+4. Then, add the `<main-nav />` component to the template. This should be inserted next to the "Dashboard" link in the default Jetstream AppLayout component, you can customize and move this as needed.
 
 ---
 
-## What’s Included:
+# What’s Included:
 There will be 3 new sections in Nova now: Menus, File Manager and Pages.
+
+### Config Files
+`nova-page-builder.php` - This file lets you set what `model`, `resource` and `views_path` is used for the page builder. You can update these as necessary. 
+`nova-menu.php` - This file configures the Menu Builder package
+`nova-tinymce.php` - This file is a custom config for the TinyMCE Rich-Text-Editor
 
 ### Pages
 Pages require templates. Templates have 2 dependencies, a config file with sections available in that template and a Vue file to render the template. The Page Config file and the Page Template parent directory need to be named the same, capitalization and all.  
-ex: `resources/views/pages/About.php` & `resources/js/Pages/About/Index.vue`
+ex: `{views_path}/pages/About.php` & `resources/js/Pages/About/Index.vue`
 ##### Page Config
-The config is made up of Nova fields in an array syntax. This uses the Flexible Content package. You can read more docs here: https://github.com/whitecube/nova-flexible-content. To see an example, please refer to `resources/views/pages/Default.php`
+The config is made up of Nova fields in an array syntax. This uses the Flexible Content package. You can read more docs here: https://github.com/whitecube/nova-flexible-content. To see an example, please refer to `{views_path}/pages/Default.php`
 ##### Page Vue Template
 This package currently works off Inertia so you will create your page layouts in `resources/js/Pages/LAYOUT_NAME/Index.vue`.  To see an example, please refer to `resources/js/pages/Default/Index.vue`
 ###### Default Page Template Components
@@ -47,8 +50,6 @@ The PageController is fairly straightforward. It finds the page via the supplied
 #### Menu
 Menu is coming from https://github.com/optimistdigital/nova-menu-builder. The page builder package publishes the config and migrations for the menu builder package.  You can create custom menu item types and everything else from the docs.    
 
-There is a config file named `nova-menu.php` that you can update.
-
 ##### Rendering the Menu
 To render the menu in the Vue app, include the `<main-nav>` component from the `resources/js/PageBuilder/partials/MainNav.vue` file. This will render a menu with an `<jet-nav-link>` for each link. This can also be customized.
 
@@ -56,17 +57,17 @@ To render the menu in the Vue app, include the `<main-nav>` component from the `
 The File Manager is coming from https://github.com/InfinetyEs/Nova-Filemanager. 
 
 ##### Other packages included:
-1. Nova TinyMCE - has a custom config file named `nova-tinymce.php`. https://github.com/emilianotisato/nova-tinymce
+1. Nova TinyMCE - https://github.com/emilianotisato/nova-tinymce
 2. Nova Sidebar Icons - https://github.com/anaseqal/nova-sidebar-icons
 3. Flexible Content - https://github.com/whitecube/nova-flexible-content
 4. Nova Tabs - https://github.com/eminiarts/nova-tabs
 
 ---
 
-## Creating Page Layouts
+# Creating Page Layouts
 
 ### Config File
-To create new page layouts that will be available in the CMS, create a php file in `resources/views/pages/NAME.php`. You can view the `Default.php` file to see how it works. The basics of it is an array of Nova fields that are named and will be available in the Vue file.
+To create new page layouts that will be available in the CMS, create a php file in `{views_path}/pages/NAME.php`. You can view the `Default.php` file to see how it works. The basics of it is an array of Nova fields that are named and will be available in the Vue file.
 
 ### Vue File
 This package is set up to use Inertia by default. To add an Inertia page, create a new Directory and Index.vue file in `resources/js/Pages`. You can see the `Default` Page as an example. The config file and Vue direcotry names need to be identical.
@@ -92,11 +93,11 @@ This will get the content for a section with the slug “intro” from the layou
 
 ---
 
-## Tutorial to Create New Page Layout
+# Tutorial to Create New Page Layout
 We are going to create an “About” page that will just have a hero image and a wysiwyg section for an “introduction”.
 
 ### Create the layout's config file
-Create the file `resources/views/pages/About.php` with the following content:
+Create the file `{views_path}/About.php` with the following content:
 ```
 <?php
 

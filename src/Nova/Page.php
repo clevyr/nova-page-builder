@@ -213,7 +213,7 @@ class Page extends Resource
      */
     private function getTemplates() {
         /*
-         * Available templates are generated via resources/views/pages.
+         * Available templates are located in the path via config('nova-page-builder.views_path')
          *
          * The file name must match the Vue page file name.
          *

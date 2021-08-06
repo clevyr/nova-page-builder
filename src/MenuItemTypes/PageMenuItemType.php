@@ -16,16 +16,16 @@ abstract class PageMenuItemType extends \OptimistDigital\MenuBuilder\MenuItemTyp
     }
 
     public static function getOptions($locale): array {
-        return Page::all()->pluck('title', 'id')->toArray();
+        return config('nova-page-builder.model',Page::class)::all()->pluck('title', 'id')->toArray();
     }
 
     public static function getDisplayValue($value, ?array $data, $locale) {
-        return Page::find($value)->title;
+        return config('nova-page-builder.model',Page::class)::find($value)->title;
     }
 
     public static function getValue($value, ?array $data, $locale)
     {
-        return '/'.Page::find($value)->slug;
+        return '/'.config('nova-page-builder.model',Page::class)::find($value)->slug;
     }
 
     public static function getFields(): array

@@ -3,11 +3,12 @@
 namespace Clevyr\NovaPageBuilder;
 
 use Inertia\Inertia;
+use Clevyr\NovaPageBuilder\Models\Page;
 
 class NovaPageBuilder
 {
     public static function catchAll() {
-        $page = config('nova-page-builder.model')::where('slug', request()->path())
+        $page = config('nova-page-builder.model', Page::class)::where('slug', request()->path())
             ->where('is_published', 1)
             ->first();
 
