@@ -16,22 +16,23 @@
 </template>
 
 <script>
-    export default {
-    	props: ['page'],
-        computed: {
-    		websiteHost() {
-    			return window.location.origin;
-            },
-            meta() {
-    			return {
-					title: this.page.title ?? 'Welcome',
-					website: this.page.website ?? 'Clevyr Website',
-					meta_description: this.page.meta_description ?? 'Description',
-					meta_keywords: this.page.meta_keywords ?? 'Keywords',
-					href: window.location.pathname,
-					og_image: this.page.og_image ?? '',
-                }
-            }
-        }
-    }
+export default {
+    computed: {
+        websiteHost() {
+            return window.location.origin;
+        },
+        meta() {
+            const metadata = this.$page.props.metadata;
+
+            return {
+                title: metadata.meta_title ?? 'Welcome',
+                website: metadata.website ?? 'Clevyr Website',
+                meta_description: metadata.meta_description ?? 'Description',
+                meta_keywords: metadata.meta_keywords ?? 'Keywords',
+                href: window.location.pathname,
+                og_image: metadata.og_image ?? '',
+            };
+        },
+    },
+};
 </script>

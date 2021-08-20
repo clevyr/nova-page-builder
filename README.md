@@ -89,6 +89,19 @@ export default {
 ```
 This will get the content for a section with the slug “intro” from the layout’s config file.
 
+## Meta Information
+To inject the meta information into the layout view, add the `<Head />` component to the `<template>` of the `AppLayout.vue` file.  
+Next, import and register the Vue component.  
+```
+import Head from '../PageBuilder/partials/Head';
+
+// inside the export object, add Head to the components
+components: {
+    Head,
+}
+
+```
+
 ---
 
 # Tutorial to Create New Page Layout
