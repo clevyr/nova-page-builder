@@ -58,11 +58,11 @@ class NovaPageBuilderServiceProvider extends ServiceProvider
                 __DIR__.'/../resources/js' => resource_path('js'),
             ], 'clevyr-nova-page-builder');
 
-            // 3rd party artisan commands
-            Artisan::call('vendor:publish', [
-                '--force' => true,
-                '--provider' => 'Anaseqal\NovaSidebarIcons\ToolServiceProvider'
-            ]);
+            //  Publishing nova icon files.
+            $this->publishes([
+                __DIR__.'../../../anaseqal/nova-sidebar-icons/resources/js' => resource_path('views/vendor/nova/resources'),
+            ], 'nova-views');
+
         }
 
         // Share menu automatically if available
