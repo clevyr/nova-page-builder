@@ -19,9 +19,6 @@
 
     "require": {
         "php": "^7.3|^8.0",
-        "laravel/framework": "^8.40",
-        "laravel/nova": "^3.27",
-        "inertiajs/inertia-laravel": "^0.4.2",
         "whitecube/nova-flexible-content": "^0.2.8",
         "infinety-es/nova-filemanager": "^2.8",
         "eminiarts/nova-tabs": "^1.4",
