@@ -22,7 +22,7 @@
         "whitecube/nova-flexible-content": "^0.2.8",
         "infinety-es/nova-filemanager": "^2.8",
         "eminiarts/nova-tabs": "^1.4",
-        "optimistdigital/nova-menu-builder": "^5.3",
+        "optimistdigital/nova-menu-builder": "^6.1.2",
         "anaseqal/nova-sidebar-icons": "^0.0.3",
         "emilianotisato/nova-tinymce": "^1.2"
     },
