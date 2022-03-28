@@ -28,7 +28,9 @@ return [
     |
     */
 
-    'locales' => config('nova-page-builder.locales'),
+    'locales' => [
+        'en' => 'English',
+    ],
 
 
     /*
