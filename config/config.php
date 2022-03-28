@@ -7,7 +7,5 @@ return [
 
     'views_path' => resource_path('views/vendor/nova-page-builder/pages/'),
 
-    'locales' => [
-        'en' => 'English'
-    ],
+    'locales' => config('nova-menu.locales'),
 ];
