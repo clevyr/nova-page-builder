@@ -74,6 +74,10 @@ class Page extends Resource
                     ->options($this->getTemplates())
                     ->default('default')
                     ->required(),
+
+                Select::make('Locale')
+                    ->options(config('nova-page-builder.locales')),
+
                 Boolean::make('Published?', 'is_published')
                     ->default(false),
 

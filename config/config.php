@@ -5,5 +5,9 @@ return [
 
     'model' => \Clevyr\NovaPageBuilder\Models\Page::class,
 
-    'views_path' => resource_path('views/vendor/nova-page-builder/pages/')
+    'views_path' => resource_path('views/vendor/nova-page-builder/pages/'),
+
+    'locales' => [
+        'en' => 'English'
+    ],
 ];
