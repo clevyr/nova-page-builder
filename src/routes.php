@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 
 Route::middleware(['web'])->group(function() {
+    /**
+     * Set the Locale
+     */
     Route::get('/locale/{locale}', function (Request $request, $locale) {
         if (
             $request->hasSession() &&
@@ -16,6 +19,9 @@ Route::middleware(['web'])->group(function() {
         return redirect($referrer ?? '/');
     })->name('set-locale');
 
+    /**
+     * Try to fetch Page Builder pages when no other routes are found
+     */
     Route::fallback(function () {
         return Clevyr\NovaPageBuilder\NovaPageBuilder::catchAll();
     });

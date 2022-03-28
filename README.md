@@ -12,13 +12,6 @@ Migrate the database
 ```
 php artisan migrate
 ```
-### Set Up Routing
-At the bottom of your `web.php` routes file, include:
-```
-Route::fallback(function() {
-    return Clevyr\NovaPageBuilder\NovaPageBuilder::catchAll();
-});
-```
 ### How to Create Navigation
 1. Create the "Header" navigation in the Nova admin.
 2. Add `import MainNav from '@/PageBuilder/partials/MainNav';` to the Vue component AppLayout.vue (`resources/js/Layouts/AppLayout.vue`)
@@ -31,8 +24,12 @@ Route::fallback(function() {
 There will be 3 new sections in Nova now: Menus, File Manager and Pages.
 
 ### Config Files
-`nova-page-builder.php` - This file lets you set what `model`, `resource` and `views_path` is used for the page builder. You can update these as necessary.   
-`nova-menu.php` - This file configures the Menu Builder package.  
+`nova-page-builder.php` - This file lets you set what `model`, `resource`, `views_path` and `locales` is used for the 
+page 
+builder.
+You can update these as necessary.   
+`nova-menu.php` - This file configures the Menu Builder package. This is where you set the `locales` available for 
+the Page Builder.   
 `nova-tinymce.php` - This file is a custom config for the TinyMCE Rich-Text-Editor.  
 
 ### Pages
@@ -59,6 +56,14 @@ The File Manager is coming from https://github.com/InfinetyEs/Nova-Filemanager.
 2. Nova Sidebar Icons - https://github.com/anaseqal/nova-sidebar-icons
 3. Flexible Content - https://github.com/whitecube/nova-flexible-content
 4. Nova Tabs - https://github.com/eminiarts/nova-tabs
+
+---
+
+# Locales and Translations
+You can specify which locales are available in the `nova-menu.php` file. The page builder config inherits from this 
+file.  
+
+Once you specify which locales are available, those options become available in the CMS for both Pages and Menu Items.
 
 ---
 
