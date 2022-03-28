@@ -65,6 +65,9 @@ file.
 
 Once you specify which locales are available, those options become available in the CMS for both Pages and Menu Items.
 
+To switch locales, pass the locale key (ex: `en`) as the 2nd route parameter to `/locale/{locale}`. This route can be 
+found in the `routes.php` file for this package.
+
 ---
 
 # Creating Page Layouts
