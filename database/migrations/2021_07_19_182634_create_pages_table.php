@@ -24,7 +24,6 @@ class CreatePagesTable extends Migration
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
             $table->string('og_image')->default('/img/og.jpg');
-            $table->string('locale')->default('en');
             $table->timestamps();
             $table->softDeletes();
         });
