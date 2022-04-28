@@ -4,6 +4,7 @@ namespace Clevyr\NovaPageBuilder\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Whitecube\NovaFlexibleContent\Concerns\HasFlexible;
 
 class Page extends Model
@@ -11,7 +12,7 @@ class Page extends Model
     use HasFlexible, HasFactory;
 
     protected $appends = [
-        'website'
+        'storagePath'
     ];
 
     /**
@@ -23,7 +24,12 @@ class Page extends Model
         return $this->flexible('content');
     }
 
-    public function getWebsiteAttribute() {
-        return 'Website Name From Model';
+    /**
+     * Automatically append the default storages url for files
+     *
+     * @return string
+     */
+    public function getStoragePathAttribute() {
+        return Storage::url('/');
     }
 }
