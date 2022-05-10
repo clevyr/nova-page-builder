@@ -16,15 +16,15 @@
             "url": "https://nova.laravel.com"
         },
         {
-            "url": "https://github.com/mucenica-bogdan/Nova-Filemanager.git",
-            "type": "git"
+            "type": "git",
+            "url": "https://github.com/ryandrobinson/Nova-Filemanager.git"
         }
     ],
 
     "require": {
         "php": "^7.3|^8.0",
         "whitecube/nova-flexible-content": "^0.2.8",
-        "infinety-es/nova-filemanager": "dev-laravel-v9-support",
+        "clevyr/nova-filemanager": "dev-laravel-v9-support",
         "eminiarts/nova-tabs": "^1.4",
         "optimistdigital/nova-menu-builder": "^6.1.2",
         "anaseqal/nova-sidebar-icons": "^0.0.3",
