@@ -7,6 +7,7 @@ composer require clevyr/nova-page-builder
 Publish migrations, Default page config, PageBuilder Vue components, Nova resource and Model
 ```
 php artisan vendor:publish --tag=clevyr-nova-page-builder
+php artisan vendor:publish --tag=filemanager-config
 ```
 Migrate the database
 ```
@@ -31,6 +32,7 @@ You can update these as necessary.
 `nova-menu.php` - This file configures the Menu Builder package. This is where you set the `locales` available for 
 the Page Builder.   
 `nova-tinymce.php` - This file is a custom config for the TinyMCE Rich-Text-Editor.  
+`filemanager.php` - The config file from the Filemanager plugin.
 
 ### Pages
 Pages require templates. Templates have 2 dependencies, a config file with sections available in that template and a Vue file to render the template. The Page Config file and the Page Template parent directory need to be named the same, capitalization and all.  
@@ -50,6 +52,28 @@ To render the menu in the Vue app, include the `<main-nav>` component from the `
 
 ### File Manager
 The File Manager is coming from https://github.com/clevyr/nova-filemanager. 
+#### Enabling GCS
+You need the correct .env variables. DevOps can help with this.   
+To add Google Cloug Storage to the filesystem, add the following to the `disks` array in `filesystems.php` config file.  
+```
+'gcs' => [
+    'driver' => 'gcs',
+    'key_file_path' => env('GOOGLE_CLOUD_KEY_FILE'), // optional: /path/to/service-account.json
+    'key_file' => [], // optional: Array of data that substitutes the .json file (see below)
+    'project_id' => env('GOOGLE_CLOUD_PROJECT_ID'), // optional: is included in key file
+    'bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET'),
+    'path_prefix' => env('GOOGLE_CLOUD_STORAGE_PATH_PREFIX', ''), // optional: /default/path/to/apply/in/bucket
+    'storage_api_uri' => env('GOOGLE_CLOUD_STORAGE_API_URI', null), // see: Public URLs below
+    'visibility' => 'public', // optional: public|private
+    'metadata' => ['cacheControl'=> 'public,max-age=86400'], // optional: default metadata
+],
+```
+You can set the following `.env` variables to target `gcs` disk.
+```
+FILESYSTEM_DISK=gcs
+FILEMANAGER_DISK=gcs
+```
+You will need to get the other env variables from DevOps.  
 
 ##### Other packages included:
 1. Nova TinyMCE - https://github.com/emilianotisato/nova-tinymce
