@@ -34,7 +34,7 @@ class NovaPageBuilderServiceProvider extends ServiceProvider
         // Register 3rd part tools
         Nova::tools([
             new \OptimistDigital\MenuBuilder\MenuBuilder,
-            new \Infinety\Filemanager\FilemanagerTool,
+            new \Clevyr\Filemanager\FilemanagerTool,
             new \Anaseqal\NovaSidebarIcons\NovaSidebarIcons,
         ]);
 

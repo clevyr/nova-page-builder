@@ -20,7 +20,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "whitecube/nova-flexible-content": "^0.2.8",
-        "infinety-es/nova-filemanager": "^2.8",
+        "clevyr/nova-filemanager": "^0.0",
         "eminiarts/nova-tabs": "^1.4",
         "optimistdigital/nova-menu-builder": "^6.1.2",
         "anaseqal/nova-sidebar-icons": "^0.0.3",

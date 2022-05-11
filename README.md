@@ -49,7 +49,7 @@ Menu is coming from https://github.com/optimistdigital/nova-menu-builder. The pa
 To render the menu in the Vue app, include the `<main-nav>` component from the `resources/js/PageBuilder/partials/MainNav.vue` file. This will render a menu with an `<jet-nav-link>` for each link. This can also be customized.
 
 ### File Manager
-The File Manager is coming from https://github.com/InfinetyEs/Nova-Filemanager. 
+The File Manager is coming from https://github.com/clevyr/nova-filemanager. 
 
 ##### Other packages included:
 1. Nova TinyMCE - https://github.com/emilianotisato/nova-tinymce
@@ -122,7 +122,7 @@ Create the file `{views_path}/About.php` with the following content:
 
 use Emilianotisato\NovaTinyMCE\NovaTinyMCE;
 use Laravel\Nova\Fields\Text;
-use Infinety\Filemanager\FilemanagerField;
+use Clevyr\Filemanager\FilemanagerField;
 
 return [
     // hero section

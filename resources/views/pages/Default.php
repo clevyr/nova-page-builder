@@ -1,7 +1,7 @@
 <?php
 
 use Laravel\Nova\Fields\Text;
-use Infinety\Filemanager\FilemanagerField;
+use Clevyr\Filemanager\FilemanagerField;
 use Emilianotisato\NovaTinyMCE\NovaTinyMCE;
 
 return [

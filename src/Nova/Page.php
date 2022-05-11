@@ -4,7 +4,7 @@ namespace Clevyr\NovaPageBuilder\Nova;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
-use Infinety\Filemanager\FilemanagerField;
+use Clevyr\Filemanager\FilemanagerField;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
