@@ -70,10 +70,18 @@ To add Google Cloug Storage to the filesystem, add the following to the `disks` 
 ```
 You can set the following `.env` variables to target `gcs` disk.
 ```
+GOOGLE_CLOUD_KEY_FILE=/app/storage/app/key.json
+GOOGLE_CLOUD_PROJECT_ID=
+GOOGLE_CLOUD_STORAGE_VISIBILITY=
+GOOGLE_CLOUD_STORAGE_BUCKET=
+GOOGLE_CLOUD_STORAGE_URL=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_CLIENT_REDIRECT=${APP_URL}/oauth/google/callback
 FILESYSTEM_DISK=gcs
 FILEMANAGER_DISK=gcs
 ```
-You will need to get the other env variables from DevOps.  
+You will need to get the env variables and json key from DevOps.  
 
 ##### Other packages included:
 1. Nova TinyMCE - https://github.com/emilianotisato/nova-tinymce
