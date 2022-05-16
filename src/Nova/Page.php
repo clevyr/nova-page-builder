@@ -13,13 +13,11 @@ use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Panel;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Eminiarts\Tabs\Tabs;
-use Eminiarts\Tabs\TabsOnEdit;
 use App\Nova\Resource;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Page extends Resource
 {
-    use TabsOnEdit;
 
     /**
      * The model the resource corresponds to.

@@ -14,17 +14,16 @@
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
-        }
+        },
     ],
 
     "require": {
         "php": "^7.3|^8.0",
-        "whitecube/nova-flexible-content": "^0.2.8",
+        "whitecube/nova-flexible-content": "^1.0",
         "clevyr/nova-filemanager": "^0.0",
-        "eminiarts/nova-tabs": "^1.4",
-        "optimistdigital/nova-menu-builder": "^6.1.2",
-        "anaseqal/nova-sidebar-icons": "^0.0.3",
-        "emilianotisato/nova-tinymce": "^1.2"
+        "eminiarts/nova-tabs": "^2.0",
+        "outl1ne/nova-menu-builder": "^7.0",
+        "emilianotisato/nova-tinymce": "^2.0"
     },
 
     "autoload": {

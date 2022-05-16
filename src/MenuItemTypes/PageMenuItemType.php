@@ -4,7 +4,7 @@ namespace Clevyr\NovaPageBuilder\MenuItemTypes;
 
 use Clevyr\NovaPageBuilder\Models\Page;
 
-abstract class PageMenuItemType extends \OptimistDigital\MenuBuilder\MenuItemTypes\BaseMenuItemType
+abstract class PageMenuItemType extends \Outl1ne\MenuBuilder\MenuItemTypes\BaseMenuItemType
 {
 
     public static function getIdentifier(): string {
