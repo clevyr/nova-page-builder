@@ -14,7 +14,7 @@
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
-        },
+        }
     ],
 
     "require": {
