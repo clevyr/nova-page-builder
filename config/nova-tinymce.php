@@ -20,10 +20,8 @@ return [
         'height' => '400',
 
         // Toolbars
-        'plugins' => [
-            'lists preview hr anchor pagebreak image wordcount fullscreen directionality paste textpattern media image link table code'
-        ],
-        'toolbar' => 'styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | link visualblocks',
+        'plugins' => 'lists preview anchor pagebreak image wordcount fullscreen directionality media image link table code',
+        'toolbar' => 'styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist | link image media anchor',
 
         // Tables
         'table_responsive_width' => true,
