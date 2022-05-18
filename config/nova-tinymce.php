@@ -31,7 +31,7 @@ return [
         // Uploading
         'relative_urls' => false,
         'use_lfm' => true,
-        'lfm_url' => 'nova/nova-filemanager',
+        'lfm_url' => 'nova/'.config('filemanager.path', 'nova-filemanager'),
 
         // Images
         'a11y_advanced_options' => true,

@@ -7,7 +7,7 @@ composer require clevyr/nova-page-builder
 Publish migrations, Default page config, PageBuilder Vue components, Nova resource and Model
 ```
 php artisan vendor:publish --tag=clevyr-nova-page-builder
-php artisan vendor:publish --tag=filemanager-config
+php artisan vendor:publish --tag=clevyr-nova-filemanager
 php artisan vendor:publish --provider="Emilianotisato\NovaTinyMCE\FieldServiceProvider"
 ```
 Migrate the database

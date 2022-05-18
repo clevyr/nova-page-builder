@@ -2,11 +2,8 @@
 
 namespace Clevyr\NovaPageBuilder;
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use Inertia\Inertia;
 use Laravel\Nova\Nova;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
 class NovaPageBuilderServiceProvider extends ServiceProvider
@@ -39,32 +36,28 @@ class NovaPageBuilderServiceProvider extends ServiceProvider
 
         // Publish package & vendor files
         if ($this->app->runningInConsole()) {
-            // Publish configs.
+            /*
+             * Publish configs
+             */
             $this->publishes([
+                __DIR__ . '/../config/nova-tinymce.php' => config_path('nova-tinymce.php'),
+                __DIR__ . '/../config/nova-menu.php' => config_path('nova-menu.php'),
                 __DIR__ . '/../config/config.php' => config_path('nova-page-builder.php')
             ], 'clevyr-nova-page-builder');
-            $this->publishes([
-                __DIR__ . '/../config/nova-tinymce.php' => config_path('nova-tinymce.php')
-            ], 'clevyr-nova-page-builder');
-            $this->publishes([
-                __DIR__ . '/../config/nova-menu.php' => config_path('nova-menu.php')
-            ], 'clevyr-nova-page-builder');
 
-            // Publishing the views.
+            /*
+             * Publishing the default view templates
+             */
             $this->publishes([
                 __DIR__.'/../resources/views' => resource_path('views/vendor/nova-page-builder'),
             ], 'clevyr-nova-page-builder');
 
-            //  Publishing assets.
+            /*
+             * Publish JS
+             */
             $this->publishes([
                 __DIR__.'/../resources/js' => resource_path('js'),
             ], 'clevyr-nova-page-builder');
-
-            //  Publishing nova icon files.
-            $this->publishes([
-                __DIR__.'../../../anaseqal/nova-sidebar-icons/resources/js' => resource_path('views/vendor/nova/resources'),
-            ], 'nova-views');
-
         }
     }
 }
