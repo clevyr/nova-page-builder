@@ -9,10 +9,10 @@
 </template>
 
 <script>
-	import AppLayout from '@/Layouts/AppLayout'
-	import Hero from '@/PageBuilder/sections/Hero';
-	import OneColumnLayout from "@/PageBuilder/sections/OneColumnLayout";
-	import TwoColumnLayout from "@/PageBuilder/sections/TwoColumnLayout";
+	import AppLayout from '@/Layouts/AppLayout.vue'
+	import Hero from '@/PageBuilder/sections/Hero.vue';
+	import OneColumnLayout from '@/PageBuilder/sections/OneColumnLayout.vue';
+	import TwoColumnLayout from '@/PageBuilder/sections/TwoColumnLayout.vue';
 	import SectionContent from '@/PageBuilder/mixins/SectionContent';
 
 	export default {
