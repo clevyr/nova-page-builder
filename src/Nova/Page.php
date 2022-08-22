@@ -42,7 +42,13 @@ class Page extends Resource
         'title', 'content'
     ];
 
-    function __construct($resource)
+    /**
+     * Create a new resource instance.
+     *
+     * @param  TModel|null  $resource
+     * @return void
+     */
+    function __construct($resource = null)
     {
         parent::__construct($resource);
         self::$model = config('nova-page-builder.model', \Clevyr\NovaPageBuilder\Models\Page::class);
