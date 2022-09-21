@@ -14,6 +14,10 @@
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/motomedialab/nova-flexible-content.git"
         }
     ],
 
@@ -23,7 +27,7 @@
         "clevyr/nova-filemanager": "^4.0",
         "eminiarts/nova-tabs": "^2.0",
         "outl1ne/nova-menu-builder": "^7.0",
-        "emilianotisato/nova-tinymce": "^2.0"
+        "emilianotisato/nova-tinymce": "dev-master"
     },
 
     "autoload": {
