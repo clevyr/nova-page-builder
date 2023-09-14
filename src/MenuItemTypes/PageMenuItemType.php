@@ -25,7 +25,13 @@ abstract class PageMenuItemType extends \Outl1ne\MenuBuilder\MenuItemTypes\BaseM
 
     public static function getValue($value, ?array $data, $locale)
     {
-        return '/'.config('nova-page-builder.model',Page::class)::find($value)->slug;
+        $slug = config('nova-page-builder.model',Page::class)::find($value)->slug;
+
+        if (!empty($slug) && substr($slug, 0, 1) === '/') {
+            return $slug;
+        }
+
+        return '/'.$slug;
     }
 
     public static function getFields(): array
