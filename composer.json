@@ -18,7 +18,7 @@
     ],
 
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.3|^8.4",
         "whitecube/nova-flexible-content": "^1.0",
         "clevyr/nova-filemanager": "^4.0",
         "eminiarts/nova-tabs": "^2.0",
