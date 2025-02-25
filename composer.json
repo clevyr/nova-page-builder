@@ -19,6 +19,7 @@
 
     "require": {
         "php": "^8.3|^8.4",
+        "laravel/nova": "^4.0",
         "whitecube/nova-flexible-content": "^1.0",
         "clevyr/nova-filemanager": "^4.1",
         "eminiarts/nova-tabs": "^2.0",
