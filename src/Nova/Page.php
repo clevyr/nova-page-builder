@@ -17,15 +17,15 @@ use Whitecube\NovaFlexibleContent\Flexible;
 use Eminiarts\Tabs\Tabs;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
+/**
+ * @property boolean $fieldsLocked
+ * @property string $template
+ *
+ * @mixin \Clevyr\NovaPageBuilder\Models\Page
+ */
 class Page extends Resource
 {
-
-    /**
-     * The model the resource corresponds to.
-     *
-     * @var string
-     */
-    public static $model = \Clevyr\NovaPageBuilder\Models\Page::class;
+    public static mixed $model = \Clevyr\NovaPageBuilder\Models\Page::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -141,7 +141,7 @@ class Page extends Resource
                 ->hideWhenCreating()
         ]);
 
-        return [ (new Tabs($this->title . ' Page', $panels))->withToolbar() ];
+        return [ (new Tabs($this->title() . ' Page', $panels))->withToolbar() ];
     }
 
     /**
@@ -221,6 +221,6 @@ class Page extends Resource
      */
     public static function redirectAfterCreate(NovaRequest $request, $resource): string
     {
-        return '/resources/pages/' . $resource->id . '/edit?tab=content';
+        return '/resources/pages/' . $resource->getKey() . '/edit?tab=content';
     }
 }

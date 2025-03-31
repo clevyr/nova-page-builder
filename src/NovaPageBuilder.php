@@ -9,7 +9,7 @@ use Clevyr\NovaPageBuilder\Models\Page;
 class NovaPageBuilder
 {
     public static function catchAll() {
-        $locale = app()->getLocale() ?? 'en';
+        $locale = app()->getLocale();
 
         // Share menu automatically if available
         if (Schema::hasTable(config('nova-menu.menus_table_name'))) {

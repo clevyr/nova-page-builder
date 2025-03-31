@@ -22,7 +22,8 @@ class Page extends Model
      *
      * @return Collection
      */
-    public function getFlexibleContentAttribute() {
+    public function getFlexibleContentAttribute(): Collection
+    {
         return $this->flexible('content');
     }
 
@@ -31,7 +32,8 @@ class Page extends Model
      *
      * @return string
      */
-    public function getStoragePathAttribute() {
+    public function getStoragePathAttribute(): string
+    {
         return Storage::url('/');
     }
 }
