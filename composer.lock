@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "69feaf132127b63811986c09048dfd39",
+    "content-hash": "9c2d0fa403500dfaf9e7804c325994bb",
     "packages": [
         {
             "name": "brick/math",
@@ -7403,6 +7403,70 @@
                 "source": "https://github.com/nikic/PHP-Parser/tree/v5.4.0"
             },
             "time": "2024-12-30T11:07:19+00:00"
+        },
+        {
+            "name": "nova-kit/nova-devtool",
+            "version": "v1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nova-kit/nova-devtool.git",
+                "reference": "7d1c076b15379373ae27084e61b7b245218d17c4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nova-kit/nova-devtool/zipball/7d1c076b15379373ae27084e61b7b245218d17c4",
+                "reference": "7d1c076b15379373ae27084e61b7b245218d17c4",
+                "shasum": ""
+            },
+            "require": {
+                "composer-runtime-api": "^2.2",
+                "fakerphp/faker": "^1.21",
+                "orchestra/workbench": "^7.0 || ^8.0 || ^9.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "larastan/larastan": "^2.4",
+                "laravel/nova": "^4.0",
+                "orchestra/testbench": "^7.39 || ^8.20 || ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NovaKit\\NovaDevTool\\LaravelServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NovaKit\\NovaDevTool\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com"
+                }
+            ],
+            "description": "Devtool for Laravel Nova Development",
+            "keywords": [
+                "dev",
+                "laravel",
+                "laravel-nova"
+            ],
+            "support": {
+                "issues": "https://github.com/nova-kit/nova-devtool/issues",
+                "source": "https://github.com/nova-kit/nova-devtool/tree/v1.6.0"
+            },
+            "abandoned": "laravel/nova-devtool",
+            "time": "2024-03-07T11:53:21+00:00"
         },
         {
             "name": "nunomaduro/collision",
