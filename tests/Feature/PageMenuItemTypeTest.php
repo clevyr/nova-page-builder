@@ -14,6 +14,22 @@ it('value has validation rules', function () {
         ->and($rules)->toContain('exists:'.config('nova-page-builder.model'));
 });
 
+test('if page type model no longer exists it is handled gracefully', function () {
+    $page = PageFactory::new()->create();
+    $menu = MenuFactory::new()->create();
+    MenuItemFactory::new()->create([
+        'menu_id' => $menu->getKey(),
+        'value' => $page->getKey(),
+        'class' => PageMenuItemType::class,
+    ]);
+
+    $page->delete();
+
+    $menu->refresh();
+
+    expect($menu->formatForAPI('en_US'))->toBeArray();
+});
+
 test('if value is some how null it does not break the page return', function () {
     PageFactory::new()->create();
     $menu = MenuFactory::new()->create();
