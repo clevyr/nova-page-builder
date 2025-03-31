@@ -25,9 +25,13 @@ abstract class PageMenuItemType extends \Outl1ne\MenuBuilder\MenuItemTypes\BaseM
 
     public static function getValue($value, ?array $data, $locale)
     {
+        if (is_null($value)) {
+            return 'N/A';
+        }
+
         $slug = config('nova-page-builder.model',Page::class)::find($value)->slug;
 
-        if (!empty($slug) && substr($slug, 0, 1) === '/') {
+        if (!empty($slug) && str_starts_with($slug, '/')) {
             return $slug;
         }
 
@@ -41,7 +45,9 @@ abstract class PageMenuItemType extends \Outl1ne\MenuBuilder\MenuItemTypes\BaseM
 
     public static function getRules(): array
     {
-        return [];
+        return [
+            'value' => ['required', 'exists:'.config('nova-page-builder.model')],
+        ];
     }
 
 
