@@ -5,16 +5,33 @@ declare(strict_types=1);
 namespace Workbench\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Workbench\App\Models\User;
+use Outl1ne\MenuBuilder\MenuItemTypes\MenuItemTextType;
+use Outl1ne\MenuBuilder\Models\Menu;
+use Outl1ne\MenuBuilder\Models\MenuItem;
+use Workbench\Database\Factories\UserFactory;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory()->create([
-            'test@example.com'
+        UserFactory::new()->create([
+            'email' => 'test@example.com'
         ]);
 
-        User::factory()->count(2)->create();
+        UserFactory::new()->times(2)->create();
+
+        $menu = Menu::create([
+            'name' => 'Home',
+            'slug' => 'home',
+        ]);
+
+        MenuItem::create([
+            'menu_id' => $menu->getKey(),
+            'enabled' => true,
+            'name' => 'Home',
+            'class' => MenuItemTextType::class,
+            'locale' => 'en_US',
+            'order' => 0
+        ]);
     }
 }

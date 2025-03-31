@@ -2,14 +2,14 @@
 
 namespace Clevyr\NovaPageBuilder\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Whitecube\NovaFlexibleContent\Concerns\HasFlexible;
+use Whitecube\NovaFlexibleContent\Layouts\Collection;
 
 class Page extends Model
 {
-    use HasFlexible, HasFactory;
+    use HasFlexible;
 
     protected $appends = [
         'storagePath'
@@ -18,7 +18,7 @@ class Page extends Model
     /**
      * Get the raw flexible content
      *
-     * @return \Whitecube\NovaFlexibleContent\Layouts\Collection
+     * @return Collection
      */
     public function getFlexibleContentAttribute() {
         return $this->flexible('content');

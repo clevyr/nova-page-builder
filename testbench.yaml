@@ -1,8 +1,11 @@
 laravel: '@testbench'
 
 providers:
-   - Laravel\Nova\NovaCoreServiceProvider
-   - Workbench\App\Providers\WorkbenchServiceProvider
+  - Laravel\Nova\NovaServiceProvider
+  - Laravel\Nova\NovaCoreServiceProvider
+  - Workbench\App\Providers\NovaServiceProvider
+  - Workbench\App\Providers\WorkbenchServiceProvider
+  - Clevyr\NovaPageBuilder\NovaPageBuilderServiceProvider
 
 migrations: true
 
@@ -10,8 +13,7 @@ seeders:
   - Workbench\Database\Seeders\DatabaseSeeder
 
 workbench:
-  start: '/nova'
-  user: test@example.com
+  start: /nova
   build:
     - package:discover
     - asset-publish
@@ -20,7 +22,9 @@ workbench:
     - migrate-fresh
   assets:
     - nova-assets
-  sync: []
+  sync:
+    - from: storage
+      to: workbench/storage
 
   purge:
     directories:

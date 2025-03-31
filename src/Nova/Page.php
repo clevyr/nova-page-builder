@@ -11,9 +11,9 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Panel;
+use Laravel\Nova\Resource;
 use Whitecube\NovaFlexibleContent\Flexible;
 use Eminiarts\Tabs\Tabs;
-use App\Nova\Resource;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Page extends Resource

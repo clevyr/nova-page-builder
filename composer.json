@@ -12,10 +12,6 @@
     "repositories": [
         {
             "type": "composer",
-            "url": "https://composer:Wykp0cCY0PIR6HJbQ0tMAFFQyucw1cKCZMtTzoeb8F2TJdQoTDq8STQtBsi0@composer.clevyr.com"
-        },
-        {
-            "type": "composer",
             "url": "https://nova.laravel.com"
         }
     ],
