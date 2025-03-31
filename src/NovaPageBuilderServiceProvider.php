@@ -42,7 +42,7 @@ class NovaPageBuilderServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../config/nova-tinymce.php' => config_path('nova-tinymce.php'),
                 __DIR__ . '/../config/nova-menu.php' => config_path('nova-menu.php'),
-                __DIR__ . '/../config/config.php' => config_path('nova-page-builder.php')
+                __DIR__ . '/../config/nova-page-builder.php' => config_path('nova-page-builder.php')
             ], 'clevyr-nova-page-builder');
 
             /*

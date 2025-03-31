@@ -2,6 +2,7 @@
 
 namespace Clevyr\NovaPageBuilder\Nova;
 
+use Exception;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Clevyr\Filemanager\FilemanagerField;
@@ -45,7 +46,6 @@ class Page extends Resource
     /**
      * Create a new resource instance.
      *
-     * @param  TModel|null  $resource
      * @return void
      */
     function __construct($resource = null)
@@ -57,12 +57,14 @@ class Page extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
-    public function fields(Request $request)
+    public function fields(Request $request): array
     {
+        $panels = [];
+
         /*
          * Details panel
          */
@@ -82,7 +84,7 @@ class Page extends Resource
 
                 Select::make('Locale')
                     ->options(config('nova-page-builder.locales'))
-                    ->default(array_key_first(config('nova-page-builder.locales'))),
+                    ->default(fn () => array_key_first(config('nova-page-builder.locales'))),
 
                 Boolean::make('Published?', 'is_published')
                     ->default(false),
@@ -143,56 +145,13 @@ class Page extends Resource
     }
 
     /**
-     * Get the cards available for the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function cards(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the filters available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function filters(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the lenses available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function lenses(Request $request)
-    {
-        return [];
-    }
-
-    /**
-     * Get the actions available for the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function actions(Request $request)
-    {
-        return [];
-    }
-
-    /**
      * Create the fields for the page template
      *
      * @return Flexible|null
-     * @throws \Exception
+     * @throws Exception
      */
-    private function generateFields() {
+    private function generateFields(): ?Flexible
+    {
         $config = false;
         $fields = null;
 
@@ -221,7 +180,8 @@ class Page extends Resource
      *
      * @return array
      */
-    private function getTemplates() {
+    private function getTemplates(): array
+    {
         /*
          * Available templates are located in the path via config('nova-page-builder.views_path')
          *
@@ -247,7 +207,7 @@ class Page extends Resource
      *
      * @return string
      */
-    public static function icon()
+    public static function icon(): string
     {
         return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="sidebar-icon"><path fill="var(--sidebar-icon)" class="heroicon-ui" d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z"/></svg>';
     }
@@ -255,11 +215,11 @@ class Page extends Resource
     /**
      * Redirect the user to the Content tab on the new Page when it is created
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @param  \Laravel\Nova\Resource  $resource
+     * @param NovaRequest $request
+     * @param Resource $resource
      * @return string
      */
-    public static function redirectAfterCreate(NovaRequest $request, $resource)
+    public static function redirectAfterCreate(NovaRequest $request, $resource): string
     {
         return '/resources/pages/' . $resource->id . '/edit?tab=content';
     }

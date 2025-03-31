@@ -1,12 +1,5 @@
 laravel: '@testbench'
 
-providers:
-  - Laravel\Nova\NovaServiceProvider
-  - Laravel\Nova\NovaCoreServiceProvider
-  - Workbench\App\Providers\NovaServiceProvider
-  - Workbench\App\Providers\WorkbenchServiceProvider
-  - Clevyr\NovaPageBuilder\NovaPageBuilderServiceProvider
-
 migrations: true
 
 seeders:
@@ -22,7 +15,15 @@ workbench:
     - migrate-fresh
   assets:
     - nova-assets
+  discovers:
+    web: true
+    api: false
+    views: true
+    config: true
+    commands: false
   sync:
+    - from: public
+      to: public/vendor/nova
     - from: storage
       to: workbench/storage
 
