@@ -2,14 +2,11 @@
 
 namespace Clevyr\NovaPageBuilder\Models;
 
-use Clevyr\NovaPageBuilder\Observers\PageObserver;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Whitecube\NovaFlexibleContent\Concerns\HasFlexible;
 use Whitecube\NovaFlexibleContent\Layouts\Collection;
 
-#[ObservedBy(PageObserver::class)]
 class Page extends Model
 {
     use HasFlexible;
