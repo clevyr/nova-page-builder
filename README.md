@@ -228,3 +228,17 @@ In the Vue file, we are importing multiple components.
 10. Click “Update Page”
 
 You can now add the page to the Main Navigation via the Nova Menu Builder.
+
+## Developing
+
+Run `composer serve`
+
+## Testing
+
+Run `composer test`
+
+## Lint & Format
+
+Run `composer lint`
+
+Run `composer format`
