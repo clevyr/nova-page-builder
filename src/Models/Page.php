@@ -11,6 +11,8 @@ class Page extends Model
 {
     use HasFlexible;
 
+    protected $guarded = ['id'];
+
     protected $appends = [
         'storagePath'
     ];

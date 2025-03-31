@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use Outl1ne\MenuBuilder\MenuItemTypes\MenuItemTextType;
 use Outl1ne\MenuBuilder\Models\Menu;
 use Outl1ne\MenuBuilder\Models\MenuItem;
+use Workbench\Database\Factories\PageFactory;
 use Workbench\Database\Factories\UserFactory;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +20,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         UserFactory::new()->times(2)->create();
+
+        PageFactory::new()->create();
 
         $menu = Menu::create([
             'name' => 'Home',

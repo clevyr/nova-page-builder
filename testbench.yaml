@@ -21,6 +21,7 @@ workbench:
     views: true
     config: true
     commands: false
+    factories: true
   sync:
     - from: public
       to: public/vendor/nova
