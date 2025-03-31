@@ -1,8 +1,8 @@
 <?php
 
-use Laravel\Nova\Fields\Text;
 use Clevyr\Filemanager\FilemanagerField;
 use Emilianotisato\NovaTinyMCE\NovaTinyMCE;
+use Laravel\Nova\Fields\Text;
 
 return [
     [
@@ -13,14 +13,14 @@ return [
                 ->nullable(),
             FilemanagerField::make('Background Image', 'image')
                 ->displayAsImage(),
-        ]
+        ],
     ],
     [
         'title' => 'One Column Layout',
         'slug' => 'one-column-layout',
         'fields' => [
-            NovaTinyMCE::make('Content', 'content')
-        ]
+            NovaTinyMCE::make('Content', 'content'),
+        ],
     ],
     [
         'title' => 'Two Column Layout',
@@ -29,7 +29,7 @@ return [
             NovaTinyMCE::make('Left Column', 'left_col')
                 ->nullable(),
             NovaTinyMCE::make('Right Column', 'right_col')
-                ->nullable()
-        ]
-    ]
+                ->nullable(),
+        ],
+    ],
 ];

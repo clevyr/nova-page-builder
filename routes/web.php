@@ -2,14 +2,14 @@
 
 use Illuminate\Http\Request;
 
-Route::middleware(['web'])->group(function() {
+Route::middleware(['web'])->group(function () {
     /**
      * Set the Locale
      */
     Route::get('/locale/{locale}', function (Request $request, $locale) {
         if (
             $request->hasSession() &&
-            (key_exists($locale, config('nova-page-builder.locales')) || in_array($locale, config('nova-page-builder.locales')))
+            (array_key_exists($locale, config('nova-page-builder.locales')) || in_array($locale, config('nova-page-builder.locales')))
         ) {
             $request->session()->put('locale', $locale);
         }

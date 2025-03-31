@@ -47,12 +47,12 @@ return [
         'link_class_list' => [
             [
                 'title' => 'None',
-                'value' => ''
+                'value' => '',
             ],
             [
                 'title' => 'Button',
-                'value' => 'btn p-2 bg-red-100 inline-block m-2'
-            ]
-        ]
+                'value' => 'btn p-2 bg-red-100 inline-block m-2',
+            ],
+        ],
     ],
 ];

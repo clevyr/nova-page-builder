@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         UserFactory::new()->create([
-            'email' => 'test@example.com'
+            'email' => 'test@example.com',
         ]);
 
         UserFactory::new()->times(2)->create();
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Home',
             'class' => MenuItemTextType::class,
             'locale' => 'en_US',
-            'order' => 0
+            'order' => 0,
         ]);
     }
 }

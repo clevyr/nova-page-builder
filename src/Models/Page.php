@@ -14,13 +14,11 @@ class Page extends Model
     protected $guarded = ['id'];
 
     protected $appends = [
-        'storagePath'
+        'storagePath',
     ];
 
     /**
      * Get the raw flexible content
-     *
-     * @return Collection
      */
     public function getFlexibleContentAttribute(): Collection
     {
@@ -29,8 +27,6 @@ class Page extends Model
 
     /**
      * Automatically append the default storages url for files
-     *
-     * @return string
      */
     public function getStoragePathAttribute(): string
     {

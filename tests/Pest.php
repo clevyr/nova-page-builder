@@ -1,6 +1,5 @@
 <?php
 
-
 use Clevyr\NovaPageBuilder\Tests\TestCase;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
@@ -27,7 +26,6 @@ pest()->extend(TestCase::class, LazilyRefreshDatabase::class)->in('Feature');
 | to assert different things. Of course, you may extend the Expectation API at any time.
 |
 */
-
 
 /*
 |--------------------------------------------------------------------------

@@ -33,7 +33,7 @@ class MenuItemFactory extends Factory
             'name' => fake()->word(),
             'class' => MenuItemTextType::class,
             'locale' => 'en_US',
-            'order' => 0
+            'order' => 0,
         ];
     }
 }

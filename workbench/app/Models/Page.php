@@ -2,6 +2,4 @@
 
 namespace Workbench\App\Models;
 
-class Page extends \Clevyr\NovaPageBuilder\Models\Page
-{
-}
+class Page extends \Clevyr\NovaPageBuilder\Models\Page {}

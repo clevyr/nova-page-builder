@@ -2,23 +2,23 @@
 
 namespace Clevyr\NovaPageBuilder\Nova;
 
-use Exception;
-use Illuminate\Support\Facades\File;
-use Illuminate\Http\Request;
 use Clevyr\Filemanager\FilemanagerField;
+use Eminiarts\Tabs\Tabs;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Slug;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 use Laravel\Nova\Resource;
 use Whitecube\NovaFlexibleContent\Flexible;
-use Eminiarts\Tabs\Tabs;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 /**
- * @property boolean $fieldsLocked
+ * @property bool $fieldsLocked
  * @property string $template
  *
  * @mixin \Clevyr\NovaPageBuilder\Models\Page
@@ -40,7 +40,7 @@ class Page extends Resource
      * @var array
      */
     public static $search = [
-        'title', 'content'
+        'title', 'content',
     ];
 
     /**
@@ -48,7 +48,7 @@ class Page extends Resource
      *
      * @return void
      */
-    function __construct($resource = null)
+    public function __construct($resource = null)
     {
         parent::__construct($resource);
         self::$model = config('nova-page-builder.model', \Clevyr\NovaPageBuilder\Models\Page::class);
@@ -57,8 +57,6 @@ class Page extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param Request $request
-     * @return array
      * @throws Exception
      */
     public function fields(Request $request): array
@@ -69,31 +67,31 @@ class Page extends Resource
          * Details panel
          */
         $panels[] = new Panel('Details', [
-                ID::make(__('ID'), 'id')
-                    ->sortable()
-                    ->exceptOnForms(),
+            ID::make(__('ID'), 'id')
+                ->sortable()
+                ->exceptOnForms(),
 
-                Text::make('Title', 'title')
-                    ->required()
-                    ->sortable(),
+            Text::make('Title', 'title')
+                ->required()
+                ->sortable(),
 
-                Select::make('Template')
-                    ->options($this->getTemplates())
-                    ->default('Default')
-                    ->required(),
+            Select::make('Template')
+                ->options($this->getTemplates())
+                ->default('Default')
+                ->required(),
 
-                Select::make('Locale')
-                    ->options(config('nova-page-builder.locales'))
-                    ->default(fn () => array_key_first(config('nova-page-builder.locales'))),
+            Select::make('Locale')
+                ->options(config('nova-page-builder.locales'))
+                ->default(fn () => array_key_first(config('nova-page-builder.locales'))),
 
-                Boolean::make('Published?', 'is_published')
-                    ->default(false),
+            Boolean::make('Published?', 'is_published')
+                ->default(false),
 
-                Slug::make('Slug')
-                    ->from('Title')
-                    ->separator('-')
-                    ->required()
-            ]);
+            Slug::make('Slug')
+                ->from('Title')
+                ->separator('-')
+                ->required(),
+        ]);
 
         /*
          * Content panel
@@ -114,7 +112,7 @@ class Page extends Resource
                 $fields->hideFromIndex()
                     ->collapsed()
                     ->fullWidth()
-                    ->hideWhenCreating()
+                    ->hideWhenCreating(),
             ]);
         }
 
@@ -138,16 +136,15 @@ class Page extends Resource
                 ->nullable()
                 ->hideFromIndex()
                 ->displayAsImage()
-                ->hideWhenCreating()
+                ->hideWhenCreating(),
         ]);
 
-        return [ (new Tabs($this->title() . ' Page', $panels))->withToolbar() ];
+        return [(new Tabs($this->title().' Page', $panels))->withToolbar()];
     }
 
     /**
      * Create the fields for the page template
      *
-     * @return Flexible|null
      * @throws Exception
      */
     private function generateFields(): ?Flexible
@@ -157,13 +154,13 @@ class Page extends Resource
 
         // Load the config from the page's template directory
         if ($this->template) {
-            $config = include(config('nova-page-builder.views_path').$this->template.'.php');
+            $config = include config('nova-page-builder.views_path').$this->template.'.php';
         }
 
         if ($config) {
             // Create flexible field layouts for each section in the config
             $fields = new Flexible('Content');
-            foreach($config as $template) {
+            foreach ($config as $template) {
                 $fields->addLayout(
                     $template['title'],
                     $template['slug'],
@@ -177,8 +174,6 @@ class Page extends Resource
 
     /**
      * Get a list of available page templates
-     *
-     * @return array
      */
     private function getTemplates(): array
     {
@@ -192,8 +187,7 @@ class Page extends Resource
         $pages = File::allFiles(config('nova-page-builder.views_path'));
         $files = [];
 
-        foreach ($pages as $file)
-        {
+        foreach ($pages as $file) {
             $name = explode('.', $file->getFilename())[0];
             $title = ucfirst($name);
             $files[$title] = $title;
@@ -204,8 +198,6 @@ class Page extends Resource
 
     /**
      * Get the sidebar nav item icon
-     *
-     * @return string
      */
     public static function icon(): string
     {
@@ -215,12 +207,10 @@ class Page extends Resource
     /**
      * Redirect the user to the Content tab on the new Page when it is created
      *
-     * @param NovaRequest $request
-     * @param Resource $resource
-     * @return string
+     * @param  resource  $resource
      */
     public static function redirectAfterCreate(NovaRequest $request, $resource): string
     {
-        return '/resources/pages/' . $resource->getKey() . '/edit?tab=content';
+        return '/resources/pages/'.$resource->getKey().'/edit?tab=content';
     }
 }
