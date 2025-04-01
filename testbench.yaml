@@ -4,6 +4,7 @@ providers:
   - Laravel\Nova\NovaServiceProvider
   - Laravel\Nova\NovaCoreServiceProvider
   - Workbench\App\Providers\NovaServiceProvider
+  - Outl1ne\MenuBuilder\MenuBuilderServiceProvider
   - Clevyr\NovaPageBuilder\NovaPageBuilderServiceProvider
 
 migrations: true

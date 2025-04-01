@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         MenuItem::create([
             'menu_id' => $menu->getKey(),
             'enabled' => true,
+            'name' => 'Home',
             'class' => MenuItemStaticURLType::class,
             'value' => '#',
             'locale' => 'en_US',
