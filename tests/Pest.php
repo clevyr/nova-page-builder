@@ -14,7 +14,8 @@ use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 |
 */
 
-pest()->extend(TestCase::class, LazilyRefreshDatabase::class)->in('Feature');
+pest()->extend(TestCase::class)->in(__DIR__);
+pest()->use(LazilyRefreshDatabase::class)->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
