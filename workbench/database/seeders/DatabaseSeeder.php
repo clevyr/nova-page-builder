@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Workbench\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Outl1ne\MenuBuilder\MenuItemTypes\MenuItemStaticURLType;
 use Outl1ne\MenuBuilder\MenuItemTypes\MenuItemTextType;
 use Outl1ne\MenuBuilder\Models\Menu;
 use Outl1ne\MenuBuilder\Models\MenuItem;
@@ -31,8 +32,8 @@ class DatabaseSeeder extends Seeder
         MenuItem::create([
             'menu_id' => $menu->getKey(),
             'enabled' => true,
-            'name' => 'Home',
-            'class' => MenuItemTextType::class,
+            'class' => MenuItemStaticURLType::class,
+            'value' => '#',
             'locale' => 'en_US',
             'order' => 0,
         ]);

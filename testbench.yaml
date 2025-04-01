@@ -1,5 +1,11 @@
 laravel: '@testbench'
 
+providers:
+  - Laravel\Nova\NovaServiceProvider
+  - Laravel\Nova\NovaCoreServiceProvider
+  - Workbench\App\Providers\NovaServiceProvider
+  - Clevyr\NovaPageBuilder\NovaPageBuilderServiceProvider
+
 migrations: true
 
 seeders:
