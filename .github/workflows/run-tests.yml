@@ -46,5 +46,8 @@ jobs:
       - name: List Installed Dependencies
         run: composer show -D
 
+      - name: Clear Cache
+        run: vendor/bin/testbench config:clear
+
       - name: Execute tests
         run: vendor/bin/pest --ci -p
