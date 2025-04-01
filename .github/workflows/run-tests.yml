@@ -41,7 +41,7 @@ jobs:
           composer require "orchestra/testbench:${{ matrix.testbench }}" --dev --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
         env:
-          COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
+          COMPOSER_AUTH: ${{ secrets.NOVA_AUTH }}
 
       - name: List Installed Dependencies
         run: composer show -D
