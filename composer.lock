@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5da62d26b68665366e4b5f4cffa1ccb2",
+    "content-hash": "4bc2ba1dc80b8e9d9103084516c5f041",
     "packages": [
         {
             "name": "brick/math",
@@ -1740,7 +1740,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.clevyr.com/dist/laravel/nova/laravel-nova-36788334c88892b439f527e05e03c6ae264d8487-zip-e09ad2.zip",
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-36788334c88892b439f527e05e03c6ae264d8487-zip-e09ad2.zip",
                 "reference": "36788334c88892b439f527e05e03c6ae264d8487",
                 "shasum": "1b8e1abcc39c38462d804c9da22f2063bf2e18cf"
             },
