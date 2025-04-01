@@ -16,5 +16,11 @@
     </source>
     <php>
         <env name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF" />
+        <env name="APP_ENV" value="testing" />
+        <env name="BCRYPT_ROUNDS" value="4" />
+        <env name="MAIL_DRIVER" value="array" />
+        <env name="QUEUE_CONNECTION" value="sync" />
+        <env name="SESSION_DRIVER" value="array" />
+        <env name="CACHE_STORE" value="array" />
     </php>
 </phpunit>
