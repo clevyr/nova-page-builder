@@ -49,5 +49,8 @@ jobs:
       - name: Clear Cache
         run: vendor/bin/testbench config:clear
 
+      - name: Build App
+        run: composer build
+
       - name: Execute tests
         run: composer test
