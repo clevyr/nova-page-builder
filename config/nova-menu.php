@@ -7,7 +7,6 @@ return [
     |------------------|
     */
 
-
     /*
     |--------------------------------------------------------------------------
     | Table names
@@ -16,7 +15,6 @@ return [
 
     'menus_table_name' => 'nova_menu_menus',
     'menu_items_table_name' => 'nova_menu_menu_items',
-
 
     /*
     |--------------------------------------------------------------------------
@@ -32,7 +30,6 @@ return [
         'en' => 'English',
     ],
 
-
     /*
     |--------------------------------------------------------------------------
     | Menus
@@ -47,14 +44,13 @@ return [
     */
 
     'menus' => [
-         'header' => [
-             'name' => 'Header',
-             'unique' => true,
-             'max_depth' => 10,
-             'menu_item_types' => []
-         ]
+        'header' => [
+            'name' => 'Header',
+            'unique' => true,
+            'max_depth' => 10,
+            'menu_item_types' => [],
+        ],
     ],
-
 
     /*
     |--------------------------------------------------------------------------
@@ -69,13 +65,11 @@ return [
         Clevyr\NovaPageBuilder\MenuItemTypes\PageMenuItemType::class,
     ],
 
-
     /*
     |--------------------------------|
     | Optional configuration options |
     |--------------------------------|
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +82,6 @@ return [
 
     'resource' => Outl1ne\MenuBuilder\Nova\Resources\MenuResource::class,
 
-
     /*
     |--------------------------------------------------------------------------
     | Menu Model
@@ -99,7 +92,6 @@ return [
     */
 
     'menu_model' => Outl1ne\MenuBuilder\Models\Menu::class,
-
 
     /*
     |--------------------------------------------------------------------------
@@ -112,7 +104,6 @@ return [
 
     'menu_item_model' => Outl1ne\MenuBuilder\Models\MenuItem::class,
 
-
     /*
     |--------------------------------------------------------------------------
     | Auto-load migrations
@@ -123,6 +114,5 @@ return [
     */
 
     'auto_load_migrations' => true,
-
 
 ];

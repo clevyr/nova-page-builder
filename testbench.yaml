@@ -1,0 +1,41 @@
+laravel: '@testbench'
+
+providers:
+  - Laravel\Nova\NovaServiceProvider
+  - Laravel\Nova\NovaCoreServiceProvider
+  - Workbench\App\Providers\NovaServiceProvider
+  - Outl1ne\MenuBuilder\MenuBuilderServiceProvider
+  - Clevyr\NovaPageBuilder\NovaPageBuilderServiceProvider
+
+migrations: true
+
+seeders:
+  - Workbench\Database\Seeders\DatabaseSeeder
+
+workbench:
+  start: /nova
+  build:
+    - package:discover
+    - asset-publish
+    - create-sqlite-db
+    - db-wipe
+    - migrate-fresh
+  assets:
+    - nova-assets
+  discovers:
+    web: true
+    api: false
+    views: true
+    config: true
+    commands: false
+    factories: true
+  sync:
+    - from: public
+      to: public/vendor/nova
+    - from: storage
+      to: workbench/storage
+
+  purge:
+    directories:
+      - lang/*
+      - public/vendor/*

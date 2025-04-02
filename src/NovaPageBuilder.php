@@ -2,18 +2,19 @@
 
 namespace Clevyr\NovaPageBuilder;
 
+use Clevyr\NovaPageBuilder\Models\Page;
 use Illuminate\Support\Facades\Schema;
 use Inertia\Inertia;
-use Clevyr\NovaPageBuilder\Models\Page;
 
 class NovaPageBuilder
 {
-    public static function catchAll() {
-        $locale = app()->getLocale() ?? 'en';
+    public static function catchAll()
+    {
+        $locale = app()->getLocale();
 
         // Share menu automatically if available
         if (Schema::hasTable(config('nova-menu.menus_table_name'))) {
-            Inertia::share("navigations", nova_get_menus($locale));
+            Inertia::share('navigations', nova_get_menus($locale));
         }
 
         $page = config('nova-page-builder.model', Page::class)::where('slug', request()->path())
