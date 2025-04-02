@@ -1,8 +1,7 @@
 name: "Update Changelog"
 
-on:
-  release:
-    types: [released]
+# Set to manual triggers for now since its not working due to branch protection rules
+on: workflow_dispatch
 
 permissions:
   contents: write
