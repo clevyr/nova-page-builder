@@ -55,7 +55,7 @@ abstract class PageMenuItemType extends \Outl1ne\MenuBuilder\MenuItemTypes\BaseM
     public static function getRules(): array
     {
         return [
-            'value' => ['required', 'exists:'.config('nova-page-builder.model')],
+            'value' => ['required'],
         ];
     }
 
