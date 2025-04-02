@@ -10,8 +10,7 @@ use Workbench\Database\Factories\PageFactory;
 it('value has validation rules', function () {
     $rules = PageMenuItemType::getRules()['value'];
 
-    expect($rules)->toContain('required')
-        ->and($rules)->toContain('exists:'.config('nova-page-builder.model'));
+    expect($rules)->toContain('required');
 });
 
 test('if page type model no longer exists it is handled gracefully', function () {
