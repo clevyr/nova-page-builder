@@ -1517,16 +1517,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.44.0",
+            "version": "v11.45.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "e9a33da34815ac1ed46c7e4c477a775f4592f0a7"
+                "reference": "d134bf11e2208c0c5bd488cf19e612ca176b820a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/e9a33da34815ac1ed46c7e4c477a775f4592f0a7",
-                "reference": "e9a33da34815ac1ed46c7e4c477a775f4592f0a7",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d134bf11e2208c0c5bd488cf19e612ca176b820a",
+                "reference": "d134bf11e2208c0c5bd488cf19e612ca176b820a",
                 "shasum": ""
             },
             "require": {
@@ -1547,7 +1547,7 @@
                 "guzzlehttp/uri-template": "^1.0",
                 "laravel/prompts": "^0.1.18|^0.2.0|^0.3.0",
                 "laravel/serializable-closure": "^1.3|^2.0",
-                "league/commonmark": "^2.6",
+                "league/commonmark": "^2.7",
                 "league/flysystem": "^3.25.1",
                 "league/flysystem-local": "^3.25.1",
                 "league/uri": "^7.5.1",
@@ -1634,7 +1634,7 @@
                 "league/flysystem-read-only": "^3.25.1",
                 "league/flysystem-sftp-v3": "^3.25.1",
                 "mockery/mockery": "^1.6.10",
-                "orchestra/testbench-core": "^9.9.4",
+                "orchestra/testbench-core": "^9.16.0",
                 "pda/pheanstalk": "^5.0.6",
                 "php-http/discovery": "^1.15",
                 "phpstan/phpstan": "^2.0",
@@ -1728,27 +1728,27 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-02-24T13:08:54+00:00"
+            "time": "2025-08-13T20:28:00+00:00"
         },
         {
             "name": "laravel/nova",
-            "version": "4.35.8",
+            "version": "4.35.11",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "36788334c88892b439f527e05e03c6ae264d8487"
+                "reference": "db216cb0c9f2d7a586f8bfe1f9831695253a1472"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-36788334c88892b439f527e05e03c6ae264d8487-zip-e09ad2.zip",
-                "reference": "36788334c88892b439f527e05e03c6ae264d8487",
-                "shasum": "1b8e1abcc39c38462d804c9da22f2063bf2e18cf"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-db216cb0c9f2d7a586f8bfe1f9831695253a1472-zip-9073b0.zip",
+                "reference": "db216cb0c9f2d7a586f8bfe1f9831695253a1472",
+                "shasum": "ab407d27c86e1d5602d33577248b0d23e8b983a7"
             },
             "require": {
                 "brick/money": "^0.5|^0.6|^0.7|^0.8|^0.9|^0.10",
                 "doctrine/dbal": "^2.13.3|^3.1.2|^4.0",
                 "ext-json": "*",
-                "illuminate/support": "^8.83.4|^9.3.1|^10.0|^11.0|^12.0",
+                "illuminate/support": "^8.83.4|^9.3.1|^10.48.29|^11.44.1|^12.0",
                 "inertiajs/inertia-laravel": "^0.4.5|^0.5.2|^0.6.0|^1.0",
                 "laravel/ui": "^3.3|^4.0",
                 "nesbot/carbon": "^2.53.1|^3.0",
@@ -1853,10 +1853,10 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.35.8",
+                "source": "https://github.com/laravel/nova/tree/v4.35.11",
                 "issues": "https://github.com/laravel/nova/issues"
             },
-            "time": "2025-03-10T14:34:47+00:00"
+            "time": "2025-07-31T13:17:29+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -2043,16 +2043,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.6.1",
+            "version": "2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "d990688c91cedfb69753ffc2512727ec646df2ad"
+                "reference": "10732241927d3971d28e7ea7b5712721fa2296ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/d990688c91cedfb69753ffc2512727ec646df2ad",
-                "reference": "d990688c91cedfb69753ffc2512727ec646df2ad",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/10732241927d3971d28e7ea7b5712721fa2296ca",
+                "reference": "10732241927d3971d28e7ea7b5712721fa2296ca",
                 "shasum": ""
             },
             "require": {
@@ -2081,7 +2081,7 @@
                 "symfony/process": "^5.4 | ^6.0 | ^7.0",
                 "symfony/yaml": "^2.3 | ^3.0 | ^4.0 | ^5.0 | ^6.0 | ^7.0",
                 "unleashedtech/php-coding-standard": "^3.1.1",
-                "vimeo/psalm": "^4.24.0 || ^5.0.0"
+                "vimeo/psalm": "^4.24.0 || ^5.0.0 || ^6.0.0"
             },
             "suggest": {
                 "symfony/yaml": "v2.3+ required if using the Front Matter extension"
@@ -2089,7 +2089,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.7-dev"
+                    "dev-main": "2.8-dev"
                 }
             },
             "autoload": {
@@ -2146,7 +2146,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-29T14:10:59+00:00"
+            "time": "2025-07-20T12:47:49+00:00"
         },
         {
             "name": "league/config",
