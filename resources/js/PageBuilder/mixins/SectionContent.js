@@ -30,5 +30,8 @@ export default {
 
             return false;
         },
+        getSectionContent(section) {
+            return section.attributes;
+        },
     }
 }
