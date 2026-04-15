@@ -116,7 +116,7 @@ Thanks to Inertia, page data will be passed to the views automatically as an arr
 ```vue
 // About.vue
 <template>
-    <div v-html="getSectionContent(content[0].layout).content"></div>
+    <div v-html="getSectionContent(content[0]).content"></div>
 </template>
 
 <script>
