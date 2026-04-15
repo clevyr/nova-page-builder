@@ -9,7 +9,17 @@
 export default {
     props: ['content'],
     methods: {
-        getSection(slug) {
+        getSection(slug, key = null) {
+            if (key) {
+                const section = this.content.find((s) => s.layout === slug && s.key === key);
+
+                if (section) {
+                    return section.attributes;
+                }
+                
+                return false;
+            }
+
             const section = this.content.filter((section) => {
                 return section.layout === slug;
             });
