@@ -21,8 +21,8 @@ final class LocaleController
 
     protected function hasLocale(Request $request, string $locale): bool
     {
-        $locale_exists = (array_key_exists($locale, config('nova-page-builder.locales'))
-            || in_array($locale, config('nova-page-builder.locales')));
+        $locales = config('nova-menu.locales') ?? [];
+        $locale_exists = array_key_exists($locale, $locales) || in_array($locale, $locales);
 
         return $request->hasSession() && $locale_exists;
     }

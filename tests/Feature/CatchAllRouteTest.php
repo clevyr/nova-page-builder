@@ -36,10 +36,15 @@ it('renders the page when a published page matches the slug and locale', functio
         'template' => 'Default',
     ]);
 
-    // Inertia returns a 200 HTML response on full page loads; 409 with X-Inertia
-    // header on Inertia XHR loads. Either way it's not a 404, which is what we
-    // care about here — the catchAll() resolved the page rather than aborting.
-    $response = $this->get('/about');
+    // Send an Inertia XHR request — exercises the data-response path through
+    // catchAll() without depending on a root Blade view (which is the consumer's
+    // responsibility, not this package's). A non-Inertia GET would also need
+    // resources/views/app.blade.php, which is out of scope here.
+    $response = $this->get('/about', [
+        'X-Inertia' => 'true',
+        'X-Inertia-Version' => '1',
+    ]);
 
-    expect($response->status())->not->toBe(404);
+    expect($response->status())->toBe(200)
+        ->and($response->headers->get('X-Inertia'))->toBe('true');
 });

@@ -76,8 +76,8 @@ class Page extends Resource
                     ->required(),
 
                 Select::make('Locale')
-                    ->options(config('nova-page-builder.locales'))
-                    ->default(fn () => array_key_first(config('nova-page-builder.locales'))),
+                    ->options(config('nova-menu.locales'))
+                    ->default(fn () => array_key_first(config('nova-menu.locales'))),
 
                 Boolean::make('Published?', 'is_published')
                     ->default(false),

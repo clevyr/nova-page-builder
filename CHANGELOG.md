@@ -45,6 +45,7 @@
 
   Route::fallback(fn () => NovaPageBuilder::catchAll());
   ```
+- **`nova-page-builder.locales` config key is removed.** `nova-menu.locales` is now the single source of truth — read directly by `Page::fields()` and `LocaleController`. Previous versions duplicated `nova-menu.locales` into `nova-page-builder.locales` via a load-time `config()` call, which was fragile under non-cached config-load order on Linux. If you had customized `nova-page-builder.locales` to differ from `nova-menu.locales`, move that override into `nova-menu.locales`.
 
 ### Changed (non-breaking)
 - `whitecube/nova-flexible-content` bumped to `^2.0` (Nova 5 support).
