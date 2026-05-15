@@ -36,11 +36,15 @@ class PageFactory extends Factory
             'template' => 'Default',
             'is_published' => true,
             // `NovaPageBuilder::catchAll()` runs `json_decode($page->content)`
-            // before passing it to Inertia. Seed a realistic Flexible-style
-            // payload so the workbench preview actually renders sections.
+            // before passing it to Inertia, and Nova's Flexible field reads
+            // the same structure when editing. Each section needs a 16-char
+            // `key` — that's what `whitecube/nova-flexible-content` uses to
+            // identify layout instances in the Vue editor (the field's `v-for`
+            // throws "undefined property key" without it).
             'content' => json_encode([
                 [
                     'layout' => 'hero',
+                    'key' => \Illuminate\Support\Str::random(16),
                     'attributes' => [
                         'heading' => fake()->sentence(4),
                         'image' => null,
@@ -48,6 +52,7 @@ class PageFactory extends Factory
                 ],
                 [
                     'layout' => 'one-column-layout',
+                    'key' => \Illuminate\Support\Str::random(16),
                     'attributes' => [
                         'content' => '<p>'.fake()->paragraph().'</p>',
                     ],
