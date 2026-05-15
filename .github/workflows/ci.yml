@@ -1,9 +1,35 @@
-name: run-tests
+name: CI
 
 on: push
 
 jobs:
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          coverage: none
+
+      - name: Install composer dependencies
+        run: |
+          composer require "laravel/framework:13.*" --no-interaction --no-update
+          composer require "orchestra/testbench:^11.0" --dev --no-interaction --no-update
+          composer update --prefer-stable --prefer-dist --no-interaction
+        env:
+          COMPOSER_AUTH: ${{ secrets.NOVA_AUTH }}
+
+      - name: Run PHPStan
+        run: ./vendor/bin/phpstan --error-format=github --memory-limit=1G
+
   test:
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    needs: phpstan
     runs-on: ${{ matrix.os }}
     timeout-minutes: 5
     strategy:
@@ -25,8 +51,6 @@ jobs:
             laravel: 12.*
             testbench: ^10.8
             stability: prefer-lowest
-
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
