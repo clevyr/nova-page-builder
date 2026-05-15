@@ -16,14 +16,15 @@
         }
     ],
     "require": {
-        "php": "^8.3|^8.4",
-        "laravel/nova": "^4.35",
-        "whitecube/nova-flexible-content": "^1.0",
-        "clevyr/nova-filemanager": "^4.0",
-        "eminiarts/nova-tabs": "^2.0",
-        "outl1ne/nova-menu-builder": "^7.0",
-        "emilianotisato/nova-tinymce": "^2.0",
-        "nova-kit/nova-packages-tool": "^1.0"
+        "php": "^8.3|^8.4|^8.5",
+        "laravel/nova": "^5.0",
+        "whitecube/nova-flexible-content": "^2.0",
+        "clevyr/nova-filemanager": "^5.0",
+        "outl1ne/nova-menu-builder": "^8.0",
+        "inertiajs/inertia-laravel": "^2.0|^3.0"
+    },
+    "suggest": {
+        "murdercode/nova4-tinymce-editor": "Required (^2.0) only if you use the default published Default.php page stub, which renders TinymceEditor fields. Swap or override the stub to use any other rich-text field."
     },
     "autoload": {
         "psr-4": {
@@ -41,12 +42,14 @@
         }
     },
     "require-dev": {
-        "orchestra/testbench": "^9.11",
-        "nova-kit/nova-devtool": "^1.3",
-        "pestphp/pest": "^3.8",
-        "pestphp/pest-plugin-laravel": "^3.1",
+        "orchestra/testbench": "^10.8|^11.0",
+        "laravel/nova-devtool": "^1.9",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0",
         "larastan/larastan": "^3.0",
-        "laravel/pint": "^1.21"
+        "laravel/pint": "^1.21",
+        "murdercode/nova4-tinymce-editor": "^2.0",
+        "roave/security-advisories": "dev-latest"
     },
     "autoload-dev": {
         "psr-4": {

@@ -3,7 +3,6 @@
 namespace Clevyr\NovaPageBuilder\Nova;
 
 use Clevyr\Filemanager\FilemanagerField;
-use Eminiarts\Tabs\Tabs;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -13,8 +12,8 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Panel;
 use Laravel\Nova\Resource;
+use Laravel\Nova\Tabs\Tab;
 use Whitecube\NovaFlexibleContent\Flexible;
 
 /**
@@ -61,54 +60,45 @@ class Page extends Resource
      */
     public function fields(Request $request): array
     {
-        $panels = [];
+        $tabs = [
+            Tab::make('Details', [
+                ID::make(__('ID'), 'id')
+                    ->sortable()
+                    ->exceptOnForms(),
 
-        /*
-         * Details panel
-         */
-        $panels[] = new Panel('Details', [
-            ID::make(__('ID'), 'id')
-                ->sortable()
-                ->exceptOnForms(),
+                Text::make('Title', 'title')
+                    ->required()
+                    ->sortable(),
 
-            Text::make('Title', 'title')
-                ->required()
-                ->sortable(),
+                Select::make('Template')
+                    ->options($this->getTemplates())
+                    ->default('Default')
+                    ->required(),
 
-            Select::make('Template')
-                ->options($this->getTemplates())
-                ->default('Default')
-                ->required(),
+                Select::make('Locale')
+                    ->options(config('nova-page-builder.locales'))
+                    ->default(fn () => array_key_first(config('nova-page-builder.locales'))),
 
-            Select::make('Locale')
-                ->options(config('nova-page-builder.locales'))
-                ->default(fn () => array_key_first(config('nova-page-builder.locales'))),
+                Boolean::make('Published?', 'is_published')
+                    ->default(false),
 
-            Boolean::make('Published?', 'is_published')
-                ->default(false),
+                Slug::make('Slug')
+                    ->from('Title')
+                    ->separator('-')
+                    ->required(),
+            ]),
+        ];
 
-            Slug::make('Slug')
-                ->from('Title')
-                ->separator('-')
-                ->required(),
-        ]);
-
-        /*
-         * Content panel
-         */
-        // Get the available fields for this page
         $fields = $this->generateFields();
 
         if ($fields) {
-            // Remove button if fields are locked (a page with a 'fixed' content layout)
             if ($this->fieldsLocked) {
                 $fields->limit(0);
             } else {
                 $fields->button('Add Section');
             }
 
-            // Set fields
-            $panels[] = new Panel('Content', [
+            $tabs[] = Tab::make('Content', [
                 $fields->hideFromIndex()
                     ->collapsed()
                     ->fullWidth()
@@ -116,10 +106,7 @@ class Page extends Resource
             ]);
         }
 
-        /*
-         * Meta Info panel
-         */
-        $panels[] = new Panel('Meta Information', [
+        $tabs[] = Tab::make('Meta Information', [
             Text::make('Meta Title', 'meta_title')
                 ->nullable()
                 ->hideFromIndex()
@@ -139,7 +126,7 @@ class Page extends Resource
                 ->hideWhenCreating(),
         ]);
 
-        return [(new Tabs($this->title().' Page', $panels))->withToolbar()];
+        return [Tab::group($this->title().' Page', $tabs)];
     }
 
     /**

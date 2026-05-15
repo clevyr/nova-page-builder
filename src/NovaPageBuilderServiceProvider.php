@@ -2,11 +2,9 @@
 
 namespace Clevyr\NovaPageBuilder;
 
-use Clevyr\Filemanager\FilemanagerTool;
 use Clevyr\NovaPageBuilder\Nova\Page;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Nova;
-use Outl1ne\MenuBuilder\MenuBuilder;
 
 class NovaPageBuilderServiceProvider extends ServiceProvider
 {
@@ -23,15 +21,8 @@ class NovaPageBuilderServiceProvider extends ServiceProvider
         // Load Routes
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
-        // Register Page Builder resource
         Nova::resources([
             config('nova-page-builder.resource', Page::class),
-        ]);
-
-        // Register 3rd part tools
-        Nova::tools([
-            new MenuBuilder,
-            new FilemanagerTool,
         ]);
 
         // Publish package & vendor files
@@ -40,7 +31,6 @@ class NovaPageBuilderServiceProvider extends ServiceProvider
              * Publish configs
              */
             $this->publishes([
-                __DIR__.'/../config/nova-tinymce.php' => config_path('nova-tinymce.php'),
                 __DIR__.'/../config/nova-menu.php' => config_path('nova-menu.php'),
                 __DIR__.'/../config/nova-page-builder.php' => config_path('nova-page-builder.php'),
             ], 'clevyr-nova-page-builder');

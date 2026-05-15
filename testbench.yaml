@@ -1,6 +1,14 @@
 laravel: '@testbench'
 
+env:
+  - APP_URL=http://localhost:8000
+
 providers:
+  # Inertia\ServiceProvider is normally auto-discovered, but Nova's own service
+  # provider registers Inertia bindings, so explicitly listing it here ensures
+  # ordering across testbench bootstraps. Remove if Nova ever stops shipping
+  # Inertia as a transitive dep.
+  - Inertia\ServiceProvider
   - Laravel\Nova\NovaServiceProvider
   - Laravel\Nova\NovaCoreServiceProvider
   - Workbench\App\Providers\NovaServiceProvider
@@ -18,8 +26,9 @@ workbench:
     - package:discover
     - asset-publish
     - create-sqlite-db
-    - db-wipe
-    - migrate-fresh
+    - db:wipe
+    - migrate:fresh
+    - storage:link
   assets:
     - nova-assets
   discovers:

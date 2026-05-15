@@ -1,7 +1,6 @@
 name: run-tests
 
-# Set to manual triggers for now since the tests are only failing on CI
-on: workflow_dispatch
+on: push
 
 jobs:
   test:
@@ -11,12 +10,20 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest]
-        php: [8.3, 8.4]
-        laravel: [11.*]
+        php: [8.3, 8.4, 8.5]
+        laravel: [12.*, 13.*]
         stability: [prefer-stable]
         include:
-          - laravel: 11.*
-            testbench: 9.*
+          - laravel: 12.*
+            testbench: ^10.8
+          - laravel: 13.*
+            testbench: ^11.0
+          # Verify the lower bound of our constraints actually resolves and passes,
+          # since this library spans two Laravel majors.
+          - php: 8.3
+            laravel: 12.*
+            testbench: ^10.8
+            stability: prefer-lowest
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
