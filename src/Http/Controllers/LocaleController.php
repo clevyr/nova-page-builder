@@ -32,7 +32,16 @@ final class LocaleController
         $redirect = $request->headers->get('referer') ?? $path;
 
         if (Str::isUrl($redirect)) {
-            return $redirect;
+            $appHost = parse_url((string) config('app.url'), PHP_URL_HOST);
+            $redirectHost = parse_url($redirect, PHP_URL_HOST);
+
+            // Only allow same-origin redirects; otherwise fall back to the
+            // default path. Prevents open-redirect via Referer header.
+            if ($appHost !== null && $appHost === $redirectHost) {
+                return $redirect;
+            }
+
+            return URL::to($path);
         }
 
         return URL::to($redirect);

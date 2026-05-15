@@ -46,6 +46,7 @@
   Route::fallback(fn () => NovaPageBuilder::catchAll());
   ```
 - **`nova-page-builder.locales` config key is removed.** `nova-menu.locales` is now the single source of truth — read directly by `Page::fields()` and `LocaleController`. Previous versions duplicated `nova-menu.locales` into `nova-page-builder.locales` via a load-time `config()` call, which was fragile under non-cached config-load order on Linux. If you had customized `nova-page-builder.locales` to differ from `nova-menu.locales`, move that override into `nova-menu.locales`.
+- **`LocaleController::getRedirect()` now only honors same-origin `Referer` headers.** Previously, any absolute URL in the `Referer` was accepted and used as the post-locale-switch redirect target — an open-redirect vector. Cross-origin Referers now fall back to the default path (`/`). If you relied on cross-origin redirects from this endpoint, redesign — that path was a security bug.
 
 ### Changed (non-breaking)
 - `whitecube/nova-flexible-content` bumped to `^2.0` (Nova 5 support).
