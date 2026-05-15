@@ -10,9 +10,10 @@ The default published `Default.php` page stub uses `Murdercode\TinymceEditor\Tin
 composer require murdercode/nova4-tinymce-editor:^2.0
 ```
 
-Publish migrations, Default page config, PageBuilder Vue components, Nova resource and Model
+Publish migrations, configs, PageBuilder Vue components, and the self-hosted TinyMCE distribution (the package ships TinyMCE via `tinymce/tinymce` so you don't need a tiny.cloud API key — the service provider auto-registers it via `Nova::script` once published):
 ```
 php artisan vendor:publish --tag=clevyr-nova-page-builder
+php artisan vendor:publish --tag=clevyr-nova-page-builder-tinymce
 php artisan vendor:publish --tag=clevyr-nova-filemanager
 php artisan vendor:publish --provider="Murdercode\TinymceEditor\FieldServiceProvider"
 ```

@@ -21,7 +21,8 @@
         "whitecube/nova-flexible-content": "^2.0",
         "clevyr/nova-filemanager": "^5.0",
         "outl1ne/nova-menu-builder": "^8.0",
-        "inertiajs/inertia-laravel": "^2.0|^3.0"
+        "inertiajs/inertia-laravel": "^2.0|^3.0",
+        "tinymce/tinymce": "^7.0"
     },
     "suggest": {
         "murdercode/nova4-tinymce-editor": "Required (^2.0) only if you use the default published Default.php page stub, which renders TinymceEditor fields. Swap or override the stub to use any other rich-text field."

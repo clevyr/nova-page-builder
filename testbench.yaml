@@ -31,6 +31,7 @@ workbench:
     - storage:link
   assets:
     - nova-assets
+    - clevyr-nova-page-builder-tinymce
   discovers:
     web: true
     api: false

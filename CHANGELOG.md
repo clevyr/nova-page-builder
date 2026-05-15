@@ -19,10 +19,11 @@
   ```bash
   php artisan vendor:publish --provider="Murdercode\TinymceEditor\FieldServiceProvider"
   ```
-- **TinyMCE is no longer in `require`.** Moved to `suggest`. The package's own PHP runtime never imported TinyMCE — it was only referenced from the publishable stub. New consumers who want the default `Default.php` stub to work out of the box must install it explicitly:
+- **TinyMCE *field* package moved from `require` to `suggest`** — `murdercode/nova4-tinymce-editor` is now an optional install. The package's own PHP runtime never imported the field class; it was only referenced from the publishable `Default.php` page stub. Install it explicitly if you want the default stub to work:
   ```bash
   composer require murdercode/nova4-tinymce-editor:^2.0
   ```
+- **TinyMCE itself is now self-hosted by this package** (added `tinymce/tinymce: ^7.0` to `require`) — no more `cdn.tiny.cloud` dependency, no API key required, no nag banner. Run `php artisan vendor:publish --tag=clevyr-nova-page-builder-tinymce` to publish the bundle into your `public/vendor/nova-page-builder/tinymce/` directory. The service provider auto-registers a `Nova::script(...)` pointing at it, so the murdercode field detects the global `window.tinymce` and skips its cloud loader.
 - **`config/nova-tinymce.php` is no longer published** by this package. The new TinyMCE package has its own (`tinymce-editor.php`). Any previously-published `config/nova-tinymce.php` in your app is orphaned and can be deleted.
 - **`nova-kit/nova-packages-tool` removed.** Abandoned upstream and not used.
 - **The package no longer registers a global `Route::fallback()`** for the CMS catch-all. Previous versions registered the fallback from inside the package's `routes/web.php`, which silently conflicted with consumer-side fallbacks (Laravel only supports one). Register it yourself at the end of your `routes/web.php`:
