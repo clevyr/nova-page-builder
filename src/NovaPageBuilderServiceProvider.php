@@ -21,6 +21,17 @@ class NovaPageBuilderServiceProvider extends ServiceProvider
         // Load Routes
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
+        // The package's config/nova-page-builder.php sets `locales` via
+        // `config('nova-menu.locales')` at config-load time, which is fragile:
+        // Laravel's config loader uses Symfony Finder without sorting, so on
+        // some filesystems (notably ext4 on Linux) nova-page-builder.php can be
+        // evaluated before nova-menu.php, leaving locales as null. Service
+        // providers boot after *all* config files have loaded, so we backfill
+        // here if needed. Production apps using `config:cache` are unaffected.
+        if (config('nova-page-builder.locales') === null) {
+            config(['nova-page-builder.locales' => config('nova-menu.locales')]);
+        }
+
         Nova::resources([
             config('nova-page-builder.resource', Page::class),
         ]);
