@@ -4,6 +4,7 @@ namespace Clevyr\NovaPageBuilder;
 
 use Clevyr\Filemanager\FilemanagerTool;
 use Clevyr\NovaPageBuilder\Nova\Page;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Nova;
 use Outl1ne\MenuBuilder\MenuBuilder;
@@ -64,7 +65,24 @@ class NovaPageBuilderServiceProvider extends ServiceProvider
                 Nova::tools($tools);
             }
 
-            Nova::script('nova-page-builder-tinymce', asset('vendor/nova-page-builder/tinymce/tinymce.min.js'));
+            // Only register the self-hosted TinyMCE script if the asset has
+            // actually been published. Registering an asset URL that 404s lets
+            // the murdercode field silently fall back to its cloud loader (with
+            // the tiny.cloud API-key nag). Detecting + logging here surfaces
+            // the missed publish step instead of leaving consumers to figure
+            // out why the editor still hits the cloud.
+            $tinymcePath = public_path('vendor/nova-page-builder/tinymce/tinymce.min.js');
+
+            if (is_file($tinymcePath)) {
+                Nova::script('nova-page-builder-tinymce', asset('vendor/nova-page-builder/tinymce/tinymce.min.js'));
+            } else {
+                Log::warning(
+                    'nova-page-builder: self-hosted TinyMCE assets not found at '.$tinymcePath.'. '
+                    .'Run `php artisan vendor:publish --tag=clevyr-nova-page-builder-tinymce` to '
+                    .'enable the self-hosted editor; otherwise the TinyMCE field will fall back to '
+                    .'cdn.tiny.cloud, which requires an API key.'
+                );
+            }
         });
 
         // Publish package & vendor files
