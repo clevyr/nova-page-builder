@@ -29,9 +29,30 @@ class PageFactory extends Factory
         return [
             'title' => fake()->sentence(4),
             'slug' => fake()->slug(),
-            'template' => 'default',
+            // Match the canonical template name (file is `Default.php` / Vue
+            // component is `Default/Index.vue`). The migration default of
+            // 'default' is a legacy artifact; pages created via Nova use the
+            // capitalized form.
+            'template' => 'Default',
             'is_published' => true,
-            'content' => fake()->paragraph(),
+            // `NovaPageBuilder::catchAll()` runs `json_decode($page->content)`
+            // before passing it to Inertia. Seed a realistic Flexible-style
+            // payload so the workbench preview actually renders sections.
+            'content' => json_encode([
+                [
+                    'layout' => 'hero',
+                    'attributes' => [
+                        'heading' => fake()->sentence(4),
+                        'image' => null,
+                    ],
+                ],
+                [
+                    'layout' => 'one-column-layout',
+                    'attributes' => [
+                        'content' => '<p>'.fake()->paragraph().'</p>',
+                    ],
+                ],
+            ]),
             'meta_keywords' => implode(',', $this->faker->words()),
             'meta_title' => fake()->sentence(),
             'meta_description' => fake()->paragraph(),
