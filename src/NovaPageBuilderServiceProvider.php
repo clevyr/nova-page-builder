@@ -2,9 +2,11 @@
 
 namespace Clevyr\NovaPageBuilder;
 
+use Clevyr\Filemanager\FilemanagerTool;
 use Clevyr\NovaPageBuilder\Nova\Page;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Nova;
+use Outl1ne\MenuBuilder\MenuBuilder;
 
 class NovaPageBuilderServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,30 @@ class NovaPageBuilderServiceProvider extends ServiceProvider
         Nova::resources([
             config('nova-page-builder.resource', Page::class),
         ]);
+
+        // Auto-register the bundled tools, but only if the consumer's own
+        // NovaServiceProvider::tools() callback hasn't already registered them
+        // (Nova doesn't dedup tool instances — two `new MenuBuilder` calls
+        // produce two sidebar entries). App providers boot before package
+        // providers, so the consumer's serving callback fires first and we can
+        // see what's already registered here.
+        Nova::serving(function () {
+            $registered = collect(Nova::registeredTools());
+
+            $tools = [];
+
+            if ($registered->doesntContain(fn ($tool) => $tool instanceof MenuBuilder)) {
+                $tools[] = new MenuBuilder;
+            }
+
+            if ($registered->doesntContain(fn ($tool) => $tool instanceof FilemanagerTool)) {
+                $tools[] = new FilemanagerTool;
+            }
+
+            if ($tools) {
+                Nova::tools($tools);
+            }
+        });
 
         // Publish package & vendor files
         if ($this->app->runningInConsole()) {

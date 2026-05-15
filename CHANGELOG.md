@@ -25,20 +25,6 @@
   ```
 - **`config/nova-tinymce.php` is no longer published** by this package. The new TinyMCE package has its own (`tinymce-editor.php`). Any previously-published `config/nova-tinymce.php` in your app is orphaned and can be deleted.
 - **`nova-kit/nova-packages-tool` removed.** Abandoned upstream and not used.
-- **The package no longer auto-registers `MenuBuilder` and `FilemanagerTool`** with Nova. Previous versions called `Nova::tools([new MenuBuilder, new FilemanagerTool])` in this package's own service provider, which was inconsistent with Nova's documented convention (every other Nova tool package leaves registration to the consumer). Add them to your application's own `App\Providers\NovaServiceProvider::tools()` method:
-  ```php
-  use Clevyr\Filemanager\FilemanagerTool;
-  use Outl1ne\MenuBuilder\MenuBuilder;
-
-  public function tools(): array
-  {
-      return [
-          new MenuBuilder,
-          new FilemanagerTool,
-      ];
-  }
-  ```
-  If your app was *also* registering these tools itself, you were getting duplicate sidebar entries on every version of the package before this one — this change cleans that up.
 - **The package no longer registers a global `Route::fallback()`** for the CMS catch-all. Previous versions registered the fallback from inside the package's `routes/web.php`, which silently conflicted with consumer-side fallbacks (Laravel only supports one). Register it yourself at the end of your `routes/web.php`:
   ```php
   use Clevyr\NovaPageBuilder\NovaPageBuilder;
@@ -54,6 +40,9 @@
 - `outl1ne/nova-menu-builder` bumped to `^8.0` (Nova 5 support).
 - `nova-kit/nova-devtool` (abandoned) replaced with `laravel/nova-devtool` (dev-only).
 - `inertiajs/inertia-laravel` now explicitly required as `^2.0 | ^3.0`. Nova 5 transitively allows `^1.3.2 | ^2.0 | ^3.0`; we exclude the abandoned v1 line.
+
+### Fixed
+- Auto-registration of `MenuBuilder` and `FilemanagerTool` now dedups via a `Nova::serving()` callback that checks `Nova::registeredTools()` for existing instances (including subclasses) before adding its own. Previous versions called `Nova::tools(...)` unconditionally, producing duplicate sidebar entries if the consumer also registered them in their own `App\Providers\NovaServiceProvider::tools()`.
 
 ### Security
 - Added `roave/security-advisories: dev-latest` to `require-dev` so `composer install` fails fast on any direct/transitive dependency with a published CVE.

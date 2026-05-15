@@ -33,22 +33,6 @@ Route::fallback(fn () => NovaPageBuilder::catchAll());
 
 Laravel only supports a single `Route::fallback()`; whichever one is registered last wins. Earlier versions of this package registered the fallback automatically from inside the package, which silently fought with consumer-side fallbacks — see CHANGELOG.
 
-### Register the bundled Nova tools
-
-Following the standard Nova convention, you register the MenuBuilder and Filemanager tools yourself in your application's `App\Providers\NovaServiceProvider::tools()` method (prior versions of this package auto-registered them — see CHANGELOG):
-
-```php
-use Clevyr\Filemanager\FilemanagerTool;
-use Outl1ne\MenuBuilder\MenuBuilder;
-
-public function tools(): array
-{
-    return [
-        new MenuBuilder,
-        new FilemanagerTool,
-    ];
-}
-```
 ### How to Create Navigation
 1. Create the "Header" navigation in the Nova admin.
 2. Add `import MainNav from '@/PageBuilder/partials/MainNav';` to the Vue component AppLayout.vue (`resources/js/Layouts/AppLayout.vue`)
@@ -61,9 +45,7 @@ public function tools(): array
 There will be 3 new sections in Nova now: Menus, File Manager and Pages.
 
 ### Config Files
-`nova-page-builder.php` - This file lets you set what `model`, `resource`, `views_path` and `locales` is used for the 
-page 
-builder.
+`nova-page-builder.php` - This file lets you set what `model`, `resource`, and `views_path` are used for the page builder. Available locales are read from `nova-menu.locales`.
 You can update these as necessary.   
 `nova-menu.php` - This file configures the Menu Builder package. This is where you set the `locales` available for 
 the Page Builder.   

@@ -2,13 +2,11 @@
 
 namespace Workbench\App\Providers;
 
-use Clevyr\Filemanager\FilemanagerTool;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Fortify\Features;
 use Laravel\Nova\Dashboards\Main;
 use Laravel\Nova\DevTool\DevTool as Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
-use Outl1ne\MenuBuilder\MenuBuilder;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -50,10 +48,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
     public function tools(): array
     {
-        return [
-            new MenuBuilder,
-            new FilemanagerTool,
-        ];
+        // The package's service provider auto-registers MenuBuilder and
+        // FilemanagerTool with consumer-side dedup; consumer/workbench leaves
+        // this empty unless additional tools are needed.
+        return [];
     }
 
     protected function resources(): void
