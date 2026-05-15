@@ -7,14 +7,8 @@ import path from 'node:path';
 // build target needs to match — that's where the served public/ directory lives.
 const skeleton = 'vendor/orchestra/testbench-core/laravel';
 
-export default defineConfig({
-    plugins: [
-        laravel({
-            input: ['workbench/resources/js/app.js'],
-            publicDirectory: `${skeleton}/public`,
-            buildDirectory: 'build',
-            refresh: ['workbench/resources/views/**'],
-        }),
+export default defineConfig(({ mode }) => {
+    const plugins = [
         vue({
             template: {
                 transformAssetUrls: {
@@ -23,14 +17,30 @@ export default defineConfig({
                 },
             },
         }),
-    ],
-    resolve: {
-        alias: {
-            '@': path.resolve(__dirname, 'workbench/resources/js'),
+    ];
+
+    // laravel-vite-plugin refuses to load under CI=true (it guards against HMR
+    // in CI). It's only needed for asset bundling, not for Vitest, so we skip
+    // it in test mode.
+    if (mode !== 'test') {
+        plugins.unshift(laravel({
+            input: ['workbench/resources/js/app.js'],
+            publicDirectory: `${skeleton}/public`,
+            buildDirectory: 'build',
+            refresh: ['workbench/resources/views/**'],
+        }));
+    }
+
+    return {
+        plugins,
+        resolve: {
+            alias: {
+                '@': path.resolve(__dirname, 'workbench/resources/js'),
+            },
         },
-    },
-    test: {
-        environment: 'happy-dom',
-        include: ['tests/Frontend/**/*.test.js'],
-    },
+        test: {
+            environment: 'happy-dom',
+            include: ['tests/Frontend/**/*.test.js'],
+        },
+    };
 });
