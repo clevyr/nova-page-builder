@@ -48,4 +48,8 @@ workbench:
   purge:
     directories:
       - lang/*
-      - public/vendor/*
+      # Only wipe Nova's own published assets between composer runs; the
+      # `clevyr-nova-page-builder-tinymce` publish output otherwise gets nuked
+      # on every `post-autoload-dump` and the TinyMCE editor falls back to its
+      # cloud loader (with the API-key nag) until the next `composer build`.
+      - public/vendor/nova/*
