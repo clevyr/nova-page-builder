@@ -83,3 +83,23 @@ jobs:
 
       - name: Execute tests
         run: ./vendor/bin/pest --ci -p
+
+  frontend:
+    name: Frontend (Vitest)
+    needs: phpstan
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install JS dependencies
+        run: npm ci
+
+      - name: Run JS tests
+        run: npm test

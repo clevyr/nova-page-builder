@@ -34,6 +34,27 @@ Route::fallback(fn () => NovaPageBuilder::catchAll());
 
 Laravel only supports a single `Route::fallback()`; whichever one is registered last wins. Earlier versions of this package registered the fallback automatically from inside the package, which silently fought with consumer-side fallbacks — see CHANGELOG.
 
+### Development & Testing
+
+Backend tests (Pest 4 + Inertia testing helpers):
+```
+composer test
+./vendor/bin/pest --ci -p     # parallel, same as CI
+./vendor/bin/phpstan analyze --memory-limit=1G
+```
+
+Frontend tests (Vitest + Vue Test Utils + Happy DOM — exercises the workbench Vue components):
+```
+npm ci
+npm test
+```
+
+To preview a fully-rendered page locally (Vite + Vue + Inertia client wired up in the workbench):
+```
+npm ci && npm run build
+composer serve
+```
+
 ### How to Create Navigation
 1. Create the "Header" navigation in the Nova admin.
 2. Add `import MainNav from '@/PageBuilder/partials/MainNav';` to the Vue component AppLayout.vue (`resources/js/Layouts/AppLayout.vue`)

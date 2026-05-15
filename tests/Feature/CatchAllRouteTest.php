@@ -48,3 +48,49 @@ it('renders the page when a published page matches the slug and locale', functio
     expect($response->status())->toBe(200)
         ->and($response->headers->get('X-Inertia'))->toBe('true');
 });
+
+it('renders the resolved page as an Inertia response with the expected component and props', function () {
+    $page = PageFactory::new()->create([
+        'slug' => 'inertia-shape',
+        'is_published' => true,
+        'locale' => app()->getLocale(),
+        'template' => 'Default',
+        'title' => 'Shape Page',
+        'meta_title' => 'Meta T',
+        'meta_keywords' => 'meta,kw',
+        'meta_description' => 'Meta D',
+        'og_image' => 'og.jpg',
+        'content' => json_encode([['layout' => 'hero', 'attributes' => ['heading' => 'Hi']]]),
+    ]);
+
+    $this->get('/inertia-shape')
+        ->assertInertia(fn ($inertia) => $inertia
+            ->component('Default/Index')
+            ->where('page.id', $page->id)
+            ->where('page.title', 'Shape Page')
+            ->has('content', 1)
+            ->where('content.0.layout', 'hero')
+            ->where('metadata.meta_title', 'Meta T')
+            ->where('metadata.meta_keywords', 'meta,kw')
+            ->where('metadata.meta_description', 'Meta D')
+            ->where('metadata.og_image', 'og.jpg')
+        );
+});
+
+it('shares the navigations array when the menus table is populated', function () {
+    \Outl1ne\MenuBuilder\Models\Menu::create([
+        'name' => 'Main',
+        'slug' => 'main',
+    ]);
+
+    PageFactory::new()->create([
+        'slug' => 'with-nav',
+        'is_published' => true,
+        'locale' => app()->getLocale(),
+        'template' => 'Default',
+        'content' => '[]',
+    ]);
+
+    $this->get('/with-nav')
+        ->assertInertia(fn ($inertia) => $inertia->has('navigations'));
+});
