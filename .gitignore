@@ -4,4 +4,3 @@ node_modules/
 .DS_Store
 auth.json
 .env
-package-lock.json
