@@ -20,7 +20,8 @@ jobs:
             testbench: ^11.0
           # Verify the lower bound of our constraints actually resolves and passes,
           # since this library spans two Laravel majors.
-          - php: 8.3
+          - os: ubuntu-latest
+            php: 8.3
             laravel: 12.*
             testbench: ^10.8
             stability: prefer-lowest
