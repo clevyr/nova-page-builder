@@ -4,16 +4,57 @@ Install via Composer
 ```
 composer require clevyr/nova-page-builder
 ```
-Publish migrations, Default page config, PageBuilder Vue components, Nova resource and Model
+
+The default published `Default.php` page stub uses `Murdercode\TinymceEditor\TinymceEditor`, which is a `suggest`ed (not required) dependency. Install it if you want the default stub to work out of the box, or override the stub to use any other rich-text field (Trix, Markdown, etc.).
+```
+composer require murdercode/nova4-tinymce-editor:^2.0
+```
+
+Publish migrations, configs, PageBuilder Vue components, and the self-hosted TinyMCE distribution (the package ships TinyMCE via `tinymce/tinymce` so you don't need a tiny.cloud API key — the service provider auto-registers it via `Nova::script` once published):
 ```
 php artisan vendor:publish --tag=clevyr-nova-page-builder
+php artisan vendor:publish --tag=clevyr-nova-page-builder-tinymce
 php artisan vendor:publish --tag=clevyr-nova-filemanager
-php artisan vendor:publish --provider="Emilianotisato\NovaTinyMCE\FieldServiceProvider"
+php artisan vendor:publish --provider="Murdercode\TinymceEditor\FieldServiceProvider"
 ```
 Migrate the database
 ```
 php artisan migrate
 ```
+
+### Register the catch-all page route
+
+The page builder serves CMS pages through a global fallback route. Register it at the **end** of your `routes/web.php` so all of your own routes match first:
+
+```php
+use Clevyr\NovaPageBuilder\NovaPageBuilder;
+
+Route::fallback(fn () => NovaPageBuilder::catchAll());
+```
+
+Laravel only supports a single `Route::fallback()`; whichever one is registered last wins. Earlier versions of this package registered the fallback automatically from inside the package, which silently fought with consumer-side fallbacks — see CHANGELOG.
+
+### Development & Testing
+
+Backend tests (Pest 4 + Inertia testing helpers):
+```
+composer test
+./vendor/bin/pest --ci -p     # parallel, same as CI
+./vendor/bin/phpstan analyze --memory-limit=1G
+```
+
+Frontend tests (Vitest + Vue Test Utils + Happy DOM — exercises the workbench Vue components):
+```
+npm ci
+npm test
+```
+
+To preview a fully-rendered page locally (Vite + Vue + Inertia client wired up in the workbench):
+```
+npm ci && npm run build
+composer serve
+```
+
 ### How to Create Navigation
 1. Create the "Header" navigation in the Nova admin.
 2. Add `import MainNav from '@/PageBuilder/partials/MainNav';` to the Vue component AppLayout.vue (`resources/js/Layouts/AppLayout.vue`)
@@ -26,13 +67,10 @@ php artisan migrate
 There will be 3 new sections in Nova now: Menus, File Manager and Pages.
 
 ### Config Files
-`nova-page-builder.php` - This file lets you set what `model`, `resource`, `views_path` and `locales` is used for the 
-page 
-builder.
+`nova-page-builder.php` - This file lets you set what `model`, `resource`, and `views_path` are used for the page builder. Available locales are read from `nova-menu.locales`.
 You can update these as necessary.   
 `nova-menu.php` - This file configures the Menu Builder package. This is where you set the `locales` available for 
 the Page Builder.   
-`nova-tinymce.php` - This file is a custom config for the TinyMCE Rich-Text-Editor.  
 `filemanager.php` - The config file from the Filemanager plugin.
 
 ### Pages
@@ -85,10 +123,8 @@ FILEMANAGER_DISK=gcs
 You will need to get the env variables and json key from DevOps.  
 
 ##### Other packages included:
-1. Nova TinyMCE - https://github.com/emilianotisato/nova-tinymce
-2. Nova Sidebar Icons - https://github.com/anaseqal/nova-sidebar-icons
-3. Flexible Content - https://github.com/whitecube/nova-flexible-content
-4. Nova Tabs - https://github.com/eminiarts/nova-tabs
+1. Nova TinyMCE Editor - https://github.com/murdercode/Nova4-TinymceEditor
+2. Flexible Content - https://github.com/whitecube/nova-flexible-content
 
 ---
 
@@ -153,7 +189,7 @@ Create the file `{views_path}/About.php` with the following content:
 ```
 <?php
 
-use Emilianotisato\NovaTinyMCE\NovaTinyMCE;
+use Murdercode\TinymceEditor\TinymceEditor;
 use Laravel\Nova\Fields\Text;
 use Clevyr\Filemanager\FilemanagerField;
 
@@ -174,7 +210,7 @@ return [
         'title' => 'Introduction',
         'slug' => 'intro',
         'fields' => [
-            NovaTinyMCE::make('Content', 'content')
+            TinymceEditor::make('Content', 'content')
         ]
     ],
 ];

@@ -1,8 +1,8 @@
 <?php
 
 use Clevyr\Filemanager\FilemanagerField;
-use Emilianotisato\NovaTinyMCE\NovaTinyMCE;
 use Laravel\Nova\Fields\Text;
+use Murdercode\TinymceEditor\TinymceEditor;
 
 return [
     [
@@ -19,16 +19,16 @@ return [
         'title' => 'One Column Layout',
         'slug' => 'one-column-layout',
         'fields' => [
-            NovaTinyMCE::make('Content', 'content'),
+            TinymceEditor::make('Content', 'content'),
         ],
     ],
     [
         'title' => 'Two Column Layout',
         'slug' => 'two-column-layout',
         'fields' => [
-            NovaTinyMCE::make('Left Column', 'left_col')
+            TinymceEditor::make('Left Column', 'left_col')
                 ->nullable(),
-            NovaTinyMCE::make('Right Column', 'right_col')
+            TinymceEditor::make('Right Column', 'right_col')
                 ->nullable(),
         ],
     ],

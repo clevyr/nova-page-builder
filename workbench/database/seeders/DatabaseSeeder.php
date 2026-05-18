@@ -22,11 +22,16 @@ class DatabaseSeeder extends Seeder
 
         UserFactory::new()->times(2)->create();
 
+        PageFactory::new()->create([
+            'title' => 'Home',
+            'slug' => 'home',
+        ]);
+
         PageFactory::new()->create();
 
         $menu = Menu::create([
-            'name' => 'Home',
-            'slug' => 'home',
+            'name' => 'Header',
+            'slug' => 'header',
         ]);
 
         MenuItem::create([
@@ -34,8 +39,8 @@ class DatabaseSeeder extends Seeder
             'enabled' => true,
             'name' => 'Home',
             'class' => MenuItemStaticURLType::class,
-            'value' => '#',
-            'locale' => 'en_US',
+            'value' => '/home',
+            'locale' => 'en',
             'order' => 0,
         ]);
     }

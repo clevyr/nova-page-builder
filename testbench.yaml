@@ -1,6 +1,14 @@
 laravel: '@testbench'
 
+env:
+  - APP_URL=http://localhost:8000
+
 providers:
+  # Inertia\ServiceProvider is normally auto-discovered, but Nova's own service
+  # provider registers Inertia bindings, so explicitly listing it here ensures
+  # ordering across testbench bootstraps. Remove if Nova ever stops shipping
+  # Inertia as a transitive dep.
+  - Inertia\ServiceProvider
   - Laravel\Nova\NovaServiceProvider
   - Laravel\Nova\NovaCoreServiceProvider
   - Workbench\App\Providers\NovaServiceProvider
@@ -18,10 +26,12 @@ workbench:
     - package:discover
     - asset-publish
     - create-sqlite-db
-    - db-wipe
-    - migrate-fresh
+    - db:wipe
+    - migrate:fresh
+    - storage:link
   assets:
     - nova-assets
+    - clevyr-nova-page-builder-tinymce
   discovers:
     web: true
     api: false
@@ -38,4 +48,8 @@ workbench:
   purge:
     directories:
       - lang/*
-      - public/vendor/*
+      # Only wipe Nova's own published assets between composer runs; the
+      # `clevyr-nova-page-builder-tinymce` publish output otherwise gets nuked
+      # on every `post-autoload-dump` and the TinyMCE editor falls back to its
+      # cloud loader (with the API-key nag) until the next `composer build`.
+      - public/vendor/nova/*

@@ -1,0 +1,105 @@
+name: CI
+
+on: push
+
+jobs:
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # 2.37.1
+        with:
+          php-version: '8.5'
+          coverage: none
+
+      - name: Install composer dependencies
+        run: |
+          composer require "laravel/framework:13.*" --no-interaction --no-update
+          composer require "orchestra/testbench:^11.0" --dev --no-interaction --no-update
+          composer update --prefer-stable --prefer-dist --no-interaction
+        env:
+          COMPOSER_AUTH: ${{ secrets.NOVA_AUTH }}
+
+      - name: Run PHPStan
+        run: ./vendor/bin/phpstan --error-format=github --memory-limit=1G
+
+  test:
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    needs: phpstan
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    strategy:
+      # Spanning two Laravel majors — keep all legs running so the first failure
+      # doesn't hide regressions on the other Laravel version.
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        php: [8.3, 8.4, 8.5]
+        laravel: [12.*, 13.*]
+        stability: [prefer-stable]
+        include:
+          - laravel: 12.*
+            testbench: ^10.8
+          - laravel: 13.*
+            testbench: ^11.0
+          # Verify the lower bound of our constraints actually resolves and passes,
+          # since this library spans two Laravel majors.
+          - os: ubuntu-latest
+            php: 8.3
+            laravel: 12.*
+            testbench: ^10.8
+            stability: prefer-lowest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # 2.37.1
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: none
+
+      - name: Setup problem matchers
+        run: |
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+          composer require "orchestra/testbench:${{ matrix.testbench }}" --dev --no-interaction --no-update
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+        env:
+          COMPOSER_AUTH: ${{ secrets.NOVA_AUTH }}
+
+      - name: List Installed Dependencies
+        run: composer show -D
+
+      - name: Execute tests
+        run: ./vendor/bin/pest --ci -p
+
+  frontend:
+    name: Frontend (Vitest)
+    needs: phpstan
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Install JS dependencies
+        run: npm ci
+
+      - name: Run JS tests
+        run: npm test
