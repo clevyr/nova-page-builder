@@ -148,11 +148,11 @@ To create new page layouts that will be available in the CMS, create a php file 
 This package is set up to use Inertia by default. To add an Inertia page, create a new Directory and Index.vue file in `resources/js/Pages`. You can see the `Default` Page as an example. The config file and Vue directory names need to be identical.
 
 ### Accessing Content
-Page data will be passed to the views automatically, thanks to Inertia. To get specific section data, we have a Vue mixin called `SectionContent` that will return the content for a given section.
-```
+Thanks to Inertia, page data will be passed to the views automatically as an array. To get specific section data, we have a Vue mixin called `SectionContent` that returns an object containing the data for a given section.
+```vue
 // About.vue
 <template>
-    <div v-html="getSection('intro').content"></div>
+    <div v-html="getSectionContent(content[0]).content"></div>
 </template>
 
 <script>
@@ -164,7 +164,24 @@ export default {
 }
 </script>
 ```
-This will get the content for a section with the slug “intro” from the layout’s config file.
+
+Or dynamically render all sections passed to the component:
+```vue
+<template>
+    <div v-for="section in content"
+        :key="section.key"
+        v-html="getSectionContent(section).content" />
+</template>
+
+<script>
+import SectionContent from '@/PageBuilder/mixins/SectionContent';
+
+export default { 
+    props: ['page', 'content'],
+    mixins: [SectionContent],
+}
+</script>
+```
 
 ## Meta Information
 To inject the meta information into the layout view, add the `<Head />` component to the `<template>` of the `AppLayout.vue` file.  

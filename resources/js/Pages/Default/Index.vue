@@ -1,9 +1,9 @@
 <template>
     <app-layout>
-        <div v-for="section in content">
-            <Hero :content="getSection(section.layout)" v-if="section.layout === 'hero'" />
-            <OneColumnLayout :content="getSection(section.layout)" v-if="section.layout === 'one-column-layout'" />
-            <TwoColumnLayout :content="getSection(section.layout)" v-if="section.layout === 'two-column-layout'" />
+        <div v-for="section in content" :key="section.key">
+            <Hero :content="getSectionContent(section)" v-if="section.layout === 'hero'" />
+            <OneColumnLayout :content="getSectionContent(section)" v-if="section.layout === 'one-column-layout'" />
+            <TwoColumnLayout :content="getSectionContent(section)" v-if="section.layout === 'two-column-layout'" />
         </div>
     </app-layout>
 </template>
